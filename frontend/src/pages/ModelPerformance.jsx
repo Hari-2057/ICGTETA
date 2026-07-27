@@ -35,7 +35,7 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64 text-slate-500 text-sm font-semibold">
+      <div className="flex items-center justify-center h-64 text-slate-500 dark:text-slate-400 text-sm font-semibold">
         <span className="w-5 h-5 border-2 border-cyan-600 border-t-transparent rounded-full animate-spin mr-2"></span>
         Loading Machine Learning Model Benchmarks...
       </div>
@@ -69,16 +69,16 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
         </div>
 
         {/* Empty State Banner */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-xl text-center flex flex-col items-center justify-center min-h-[360px] space-y-4">
-          <div className="p-4 rounded-2xl bg-amber-50 text-amber-600 border border-amber-200 shadow-md">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl text-center flex flex-col items-center justify-center min-h-[360px] space-y-4 transition-colors duration-300">
+          <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 shadow-md">
             <Activity className="w-10 h-10 animate-pulse" />
           </div>
           <div className="space-y-2 max-w-md">
-            <h3 className="text-lg font-extrabold text-slate-900">
+            <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">
               No Active Risk Assessment Session
             </h3>
-            <p className="text-xs text-slate-600 leading-relaxed font-medium">
-              Model performance graphs, Optuna tuning curves, feature attributions, confusion matrix heatmaps, and the Power BI CSV export unlock after you click <span className="text-cyan-700 font-bold font-mono">Run CDSS Risk Assessment</span> on the Workspace page.
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+              Model performance graphs, Optuna tuning curves, feature attributions, confusion matrix heatmaps, and the Power BI CSV export unlock after you click <span className="text-cyan-700 dark:text-cyan-400 font-bold font-mono">Run CDSS Risk Assessment</span> on the Workspace page.
             </p>
           </div>
 
@@ -152,70 +152,70 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
 
       {/* Executive Power BI KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-md relative overflow-hidden">
+        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md relative overflow-hidden transition-colors duration-300">
           <div className="absolute top-0 right-0 w-2 h-full bg-emerald-500"></div>
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">
+          <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
             Classification Accuracy
           </span>
-          <span className="text-3xl font-extrabold text-emerald-600">
+          <span className="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">
             {((clf.accuracy || 0.9957) * 100).toFixed(1)}%
           </span>
-          <span className="text-[11px] text-slate-500 font-medium block mt-1">Stratified 5-Fold Cross-Val</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block mt-1">Stratified 5-Fold Cross-Val</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-md relative overflow-hidden">
+        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md relative overflow-hidden transition-colors duration-300">
           <div className="absolute top-0 right-0 w-2 h-full bg-cyan-500"></div>
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">
+          <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
             Weighted F1-Score
           </span>
-          <span className="text-3xl font-extrabold text-cyan-600">
+          <span className="text-3xl font-extrabold text-cyan-600 dark:text-cyan-400">
             {((clf.f1_score || 0.9957) * 100).toFixed(1)}%
           </span>
-          <span className="text-[11px] text-slate-500 font-medium block mt-1">Harmonic Precision-Recall Mean</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block mt-1">Harmonic Precision-Recall Mean</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-md relative overflow-hidden">
+        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md relative overflow-hidden transition-colors duration-300">
           <div className="absolute top-0 right-0 w-2 h-full bg-blue-500"></div>
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">
+          <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
             Multi-Class ROC-AUC
           </span>
-          <span className="text-3xl font-extrabold text-blue-600">
+          <span className="text-3xl font-extrabold text-blue-600 dark:text-blue-400">
             {(clf.roc_auc || 1.0).toFixed(3)}
           </span>
-          <span className="text-[11px] text-slate-500 font-medium block mt-1">One-vs-Rest Discrimination</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block mt-1">One-vs-Rest Discrimination</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-md relative overflow-hidden">
+        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md relative overflow-hidden transition-colors duration-300">
           <div className="absolute top-0 right-0 w-2 h-full bg-purple-500"></div>
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">
+          <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
             Severity Regressor R²
           </span>
-          <span className="text-3xl font-extrabold text-purple-600">
+          <span className="text-3xl font-extrabold text-purple-600 dark:text-purple-400">
             {(reg.r2_score || 0.9927).toFixed(3)}
           </span>
-          <span className="text-[11px] text-slate-500 font-medium block mt-1">MAE: {reg.mae?.toFixed(2) || '0.62'} pts</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block mt-1">MAE: {reg.mae?.toFixed(2) || '0.62'} pts</span>
         </div>
       </div>
 
       {/* GRAPH 1: Optuna Hyperparameter Optimization Convergence Graph */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-md space-y-4">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-md space-y-4 transition-colors duration-300">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800 flex items-center space-x-2">
-            <Zap className="w-4 h-4 text-amber-600" />
+          <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center space-x-2">
+            <Zap className="w-4 h-4 text-amber-600 dark:text-amber-400" />
             <span>Power BI Graph: Optuna Bayesian Search Optimization Curve</span>
           </h3>
-          <span className="text-xs text-amber-800 font-mono font-bold bg-amber-50 px-2.5 py-1 rounded border border-amber-200">
+          <span className="text-xs text-amber-800 dark:text-amber-300 font-mono font-bold bg-amber-50 dark:bg-amber-950/80 px-2.5 py-1 rounded border border-amber-200 dark:border-amber-800">
             Best Trial #20: 99.6% Accuracy
           </span>
         </div>
 
         {/* SVG Interactive Convergence Graph */}
-        <div className="bg-slate-50 p-5 rounded-xl border border-slate-200">
-          <div className="h-44 w-full relative flex items-end justify-between px-4 pb-6 pt-4 border-b border-l border-slate-300">
+        <div className="bg-slate-50 dark:bg-slate-800/60 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+          <div className="h-44 w-full relative flex items-end justify-between px-4 pb-6 pt-4 border-b border-l border-slate-300 dark:border-slate-600">
             {/* Horizontal Grid lines */}
-            <div className="absolute top-4 left-0 w-full border-t border-dashed border-slate-300 text-[10px] text-slate-400 pl-1 font-semibold">100%</div>
-            <div className="absolute top-20 left-0 w-full border-t border-dashed border-slate-300 text-[10px] text-slate-400 pl-1 font-semibold">95%</div>
-            <div className="absolute top-36 left-0 w-full border-t border-dashed border-slate-300 text-[10px] text-slate-400 pl-1 font-semibold">90%</div>
+            <div className="absolute top-4 left-0 w-full border-t border-dashed border-slate-300 dark:border-slate-700 text-[10px] text-slate-400 font-semibold pl-1">100%</div>
+            <div className="absolute top-20 left-0 w-full border-t border-dashed border-slate-300 dark:border-slate-700 text-[10px] text-slate-400 font-semibold pl-1">95%</div>
+            <div className="absolute top-36 left-0 w-full border-t border-dashed border-slate-300 dark:border-slate-700 text-[10px] text-slate-400 font-semibold pl-1">90%</div>
 
             {/* Trial Bar and Line Points */}
             {optunaTrials.map((pt, idx) => {
@@ -229,18 +229,18 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
                   {/* Bar */}
                   <div
                     className={`w-6 sm:w-8 rounded-t transition-all duration-500 ${
-                      pt.trial === 20 ? 'bg-gradient-to-t from-cyan-600 to-blue-600 shadow-md' : 'bg-slate-300 hover:bg-slate-400'
+                      pt.trial === 20 ? 'bg-gradient-to-t from-cyan-600 to-blue-600 shadow-md' : 'bg-slate-300 dark:bg-slate-600 hover:bg-slate-400'
                     }`}
                     style={{ height: `${heightPct}%` }}
                   ></div>
-                  <span className="text-[10px] font-mono text-slate-600 font-bold mt-2">T#{pt.trial}</span>
+                  <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400 font-bold mt-2">T#{pt.trial}</span>
                 </div>
               );
             })}
           </div>
-          <div className="flex justify-between items-center mt-3 text-[11px] text-slate-600 font-medium">
+          <div className="flex justify-between items-center mt-3 text-[11px] text-slate-600 dark:text-slate-400 font-medium">
             <span>Trial 1 (Baseline)</span>
-            <span className="font-bold text-cyan-800">Optuna 30-Iteration Tuning Trajectory</span>
+            <span className="font-bold text-cyan-800 dark:text-cyan-400">Optuna 30-Iteration Tuning Trajectory</span>
             <span>Trial 30 (Converged)</span>
           </div>
         </div>
@@ -249,9 +249,9 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
       {/* GRAPH 2 & 3: Feature Importances Bar Graph & Confusion Matrix Heatmap */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* GRAPH 2: Feature Importance Horizontal Bar Graph */}
-        <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200 p-6 shadow-md">
-          <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800 mb-4 flex items-center space-x-2">
-            <TrendingUp className="w-4 h-4 text-cyan-600" />
+        <div className="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-md transition-colors duration-300">
+          <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-4 flex items-center space-x-2">
+            <TrendingUp className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             <span>Power BI Graph: Global Feature Importance Scores</span>
           </h3>
 
@@ -261,10 +261,10 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
               return (
                 <div key={idx} className="space-y-1">
                   <div className="flex justify-between text-xs font-bold">
-                    <span className="text-slate-800">{item.name}</span>
-                    <span className="text-cyan-700 font-mono">{(item.score * 100).toFixed(1)}%</span>
+                    <span className="text-slate-800 dark:text-slate-200">{item.name}</span>
+                    <span className="text-cyan-700 dark:text-cyan-400 font-mono">{(item.score * 100).toFixed(1)}%</span>
                   </div>
-                  <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200 p-0.5">
+                  <div className="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 p-0.5">
                     <div
                       className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 h-full rounded-full transition-all duration-500"
                       style={{ width: `${pct}%` }}
@@ -277,27 +277,27 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
         </div>
 
         {/* GRAPH 3: Confusion Matrix Heatmap Grid */}
-        <div className="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-6 shadow-md flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-md flex flex-col justify-between transition-colors duration-300">
           <div>
-            <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800 mb-4 flex items-center space-x-2">
-              <Layers className="w-4 h-4 text-cyan-600" />
+            <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-4 flex items-center space-x-2">
+              <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
               <span>Power BI Graph: Multi-Class Confusion Matrix Heatmap</span>
             </h3>
 
-            <div className="overflow-x-auto bg-slate-50 p-4 rounded-xl border border-slate-200">
-              <table className="w-full text-xs text-slate-800 border-collapse">
+            <div className="overflow-x-auto bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+              <table className="w-full text-xs text-slate-800 dark:text-slate-200 border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 text-slate-600 font-extrabold">
+                  <tr className="border-b border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 font-extrabold">
                     <th className="p-2 text-left">Actual \ Predicted</th>
-                    <th className="p-2 text-center text-emerald-700">Healthy</th>
-                    <th className="p-2 text-center text-amber-700">Prediabetes</th>
-                    <th className="p-2 text-center text-rose-700">T2D</th>
+                    <th className="p-2 text-center text-emerald-700 dark:text-emerald-400">Healthy</th>
+                    <th className="p-2 text-center text-amber-700 dark:text-amber-400">Prediabetes</th>
+                    <th className="p-2 text-center text-rose-700 dark:text-rose-400">T2D</th>
                   </tr>
                 </thead>
                 <tbody>
                   {(clf.confusion_matrix || [[313, 0, 0], [1, 212, 0], [0, 0, 174]]).map((row, idx) => (
-                    <tr key={idx} className="border-b border-slate-200/60">
-                      <td className="p-2.5 font-bold text-slate-800">
+                    <tr key={idx} className="border-b border-slate-200/60 dark:border-slate-700/60">
+                      <td className="p-2.5 font-bold text-slate-800 dark:text-slate-200">
                         {['Healthy', 'Prediabetes', 'Type 2 Diabetes'][idx]}
                       </td>
                       {row.map((val, colIdx) => (
@@ -305,8 +305,8 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
                           key={colIdx}
                           className={`p-2.5 text-center font-mono font-bold rounded ${
                             idx === colIdx 
-                              ? 'text-cyan-900 bg-cyan-100 border border-cyan-300 font-extrabold' 
-                              : 'text-slate-400 bg-white'
+                              ? 'text-cyan-900 dark:text-cyan-100 bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-300 dark:border-cyan-700 font-extrabold' 
+                              : 'text-slate-400 bg-white dark:bg-slate-900'
                           }`}
                         >
                           {val}
@@ -319,11 +319,11 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
             <span>Power BI Format Export</span>
             <button
               onClick={handleExportPowerBi}
-              className="text-cyan-700 hover:text-cyan-800 font-extrabold underline flex items-center space-x-1"
+              className="text-cyan-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 font-extrabold underline flex items-center space-x-1"
             >
               <span>Download CSV Dataset</span>
             </button>
@@ -332,12 +332,12 @@ export const ModelPerformance = ({ prediction, onGoToWorkspace }) => {
       </div>
 
       {/* Optuna Tuned Hyperparameters */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-md">
-        <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800 mb-3 flex items-center space-x-2">
-          <Sliders className="w-4 h-4 text-cyan-600" />
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-md transition-colors duration-300">
+        <h3 className="text-sm font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-3 flex items-center space-x-2">
+          <Sliders className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
           <span>Optuna Hyperparameter Configuration</span>
         </h3>
-        <pre className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-800 font-mono overflow-x-auto font-semibold">
+        <pre className="bg-slate-50 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-xs text-slate-800 dark:text-slate-200 font-mono overflow-x-auto font-semibold">
           {JSON.stringify(best_hyperparameters || { n_estimators: 150, max_depth: 5, learning_rate: 0.05, eval_metric: "mlogloss" }, null, 2)}
         </pre>
       </div>

@@ -46,11 +46,11 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
   const getBadgeStyle = (cls) => {
     switch (cls) {
       case 'Healthy':
-        return 'bg-emerald-50 text-emerald-800 border-emerald-300';
+        return 'bg-emerald-50 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800';
       case 'Prediabetes':
-        return 'bg-amber-50 text-amber-800 border-amber-300';
+        return 'bg-amber-50 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800';
       default:
-        return 'bg-rose-50 text-rose-800 border-rose-300';
+        return 'bg-rose-50 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border-rose-300 dark:border-rose-800';
     }
   };
 
@@ -120,7 +120,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
       </div>
 
       {/* Search & Filter Controls */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-md flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 shadow-md flex flex-col sm:flex-row items-center justify-between gap-3 transition-colors duration-300">
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <input
@@ -128,16 +128,16 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
             placeholder="Search report ID or patient age..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:bg-white focus:border-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-100"
+            className="w-full pl-9 pr-4 py-2 liquid-input rounded-xl text-xs"
           />
         </div>
 
         <div className="flex items-center space-x-2 w-full sm:w-auto">
-          <Filter className="w-4 h-4 text-slate-500" />
+          <Filter className="w-4 h-4 text-slate-500 dark:text-slate-400" />
           <select
             value={filterClass}
             onChange={(e) => setFilterClass(e.target.value)}
-            className="bg-slate-50 border border-slate-300 text-xs font-bold text-slate-800 rounded-xl px-3 py-2 focus:bg-white focus:border-cyan-600 focus:outline-none"
+            className="liquid-input text-xs font-bold rounded-xl px-3 py-2"
           >
             <option value="ALL">All Outcomes</option>
             <option value="Healthy">Healthy</option>
@@ -149,24 +149,24 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
 
       {/* Report Cards / List View */}
       {loading ? (
-        <div className="flex items-center justify-center h-48 text-slate-500 text-xs font-semibold">
+        <div className="flex items-center justify-center h-48 text-slate-500 dark:text-slate-400 text-xs font-semibold">
           <span className="w-4 h-4 border-2 border-cyan-600 border-t-transparent rounded-full animate-spin mr-2"></span>
           Fetching Patient Reports from Supabase Table Editor...
         </div>
       ) : filteredReports.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredReports.map((item, idx) => (
-            <div key={idx} className="bg-white rounded-2xl border border-slate-200 p-5 shadow-md hover:shadow-lg transition space-y-4">
-              <div className="flex items-start justify-between border-b border-slate-100 pb-3">
+            <div key={idx} className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-md hover:shadow-lg transition space-y-4">
+              <div className="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
                 <div className="flex items-center space-x-2.5">
-                  <div className="p-2 rounded-xl bg-slate-100 text-slate-700 border border-slate-200">
-                    <FileText className="w-5 h-5 text-cyan-700" />
+                  <div className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    <FileText className="w-5 h-5 text-cyan-700 dark:text-cyan-400" />
                   </div>
                   <div>
-                    <h3 className="text-xs font-extrabold text-slate-900 font-mono">
+                    <h3 className="text-xs font-extrabold text-slate-900 dark:text-white font-mono">
                       {item.id}
                     </h3>
-                    <div className="flex items-center space-x-2 text-[10px] text-slate-500 mt-0.5 font-medium">
+                    <div className="flex items-center space-x-2 text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
                       <Calendar className="w-3 h-3 text-slate-400" />
                       <span>{item.timestamp || item.created_at}</span>
                     </div>
@@ -179,18 +179,18 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
               </div>
 
               {/* Patient Key Biomarkers Overview */}
-              <div className="grid grid-cols-3 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs">
+              <div className="grid grid-cols-3 gap-2 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
                 <div>
-                  <span className="text-[10px] text-slate-500 block font-semibold">Age / Sex</span>
-                  <span className="font-extrabold text-slate-800">{item.patient_age} yrs ({item.patient_gender?.[0]})</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 block font-semibold">Age / Sex</span>
+                  <span className="font-extrabold text-slate-800 dark:text-slate-200">{item.patient_age} yrs ({item.patient_gender?.[0]})</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-500 block font-semibold">HbA1c Level</span>
-                  <span className="font-extrabold text-cyan-800 font-mono">{item.hba1c} %</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 block font-semibold">HbA1c Level</span>
+                  <span className="font-extrabold text-cyan-800 dark:text-cyan-400 font-mono">{item.hba1c} %</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-500 block font-semibold">Fasting Glucose</span>
-                  <span className="font-extrabold text-slate-800 font-mono">{item.fasting_glucose} mg/dL</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 block font-semibold">Fasting Glucose</span>
+                  <span className="font-extrabold text-slate-800 dark:text-slate-200 font-mono">{item.fasting_glucose} mg/dL</span>
                 </div>
               </div>
 
@@ -198,7 +198,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
               <div className="flex items-center justify-between pt-1">
                 <button
                   onClick={() => onLoadReportToWorkspace(item)}
-                  className="flex items-center space-x-1 text-xs font-bold text-cyan-700 hover:text-cyan-800"
+                  className="flex items-center space-x-1 text-xs font-bold text-cyan-700 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300"
                 >
                   <span>Load Values into Workspace</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -216,7 +216,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
           ))}
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center text-slate-500 text-xs font-medium">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 text-center text-slate-500 dark:text-slate-400 text-xs font-medium">
           No saved patient reports found in Supabase Table Editor for this session. Run a CDSS Risk Assessment to insert your first record!
         </div>
       )}
