@@ -23,21 +23,16 @@ def save_report_to_supabase(
     Reads SUPABASE_KEY from environment variables.
     """
     report_id = f"CDSS_Report_{int(time.time())}"
-    report_entry = {
+    
+    # Core row matching user's Supabase table schema exactly
+    db_row = {
         "id": report_id,
-        "patient_session_id": patient_session_id,
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "patient_age": patient_data.get("age", 45),
-        "patient_gender": patient_data.get("gender", "Female"),
-        "hba1c": patient_data.get("hba1c", 5.8),
-        "fasting_glucose": patient_data.get("fasting_glucose", 105.0),
-        "random_glucose": patient_data.get("random_glucose", 140.0),
-        "predicted_class": prediction.get("predicted_class", "Healthy"),
-        "confidence_score": prediction.get("confidence_score", 95.0),
-        "severity_index": prediction.get("severity_index", 15.0),
-        "uploaded_pdf_url": None,
-        "generated_pdf_url": None,
-        "storage_provider": "Supabase Storage & PostgreSQL"
+        "patient_age": int(patient_data.get("age", 45) or 45),
+        "patient_gender": str(patient_data.get("gender", "Female")),
+        "hba1c": float(patient_data.get("hba1c", 5.8) or 5.8),
+        "fasting_glucose": float(patient_data.get("fasting_glucose", 105.0) or 105.0),
+        "predicted_class": str(prediction.get("predicted_class", "Healthy"))
     }
 
     if is_supabase_configured():
@@ -45,43 +40,22 @@ def save_report_to_supabase(
             from supabase import create_client
             supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-            # Upload generated clinical PDF report if available
-            if generated_pdf_bytes:
-                try:
-                    gen_path = f"generated/{report_id}.pdf"
-                    supabase.storage.from_("clinical-reports").upload(gen_path, generated_pdf_bytes, {"content-type": "application/pdf"})
-                    report_entry["generated_pdf_url"] = supabase.storage.from_("clinical-reports").get_public_url(gen_path)
-                except Exception as e:
-                    print(f"[Supabase Storage Gen PDF Error]: {e}")
-
-            # Upload raw patient blood test PDF report if available
-            if uploaded_pdf_bytes:
-                try:
-                    up_path = f"uploaded/{report_id}_raw.pdf"
-                    supabase.storage.from_("uploaded-patient-pdfs").upload(up_path, uploaded_pdf_bytes, {"content-type": "application/pdf"})
-                    report_entry["uploaded_pdf_url"] = supabase.storage.from_("uploaded-patient-pdfs").get_public_url(up_path)
-                except Exception as e:
-                    print(f"[Supabase Storage Upload PDF Error]: {e}")
-
             # Insert metadata into 'patient_reports' table
-            supabase.table("patient_reports").insert(report_entry).execute()
-            print(f"[Supabase] Successfully inserted record {report_id} into patient_reports table!")
+            res = supabase.table("patient_reports").insert(db_row).execute()
+            print(f"[Supabase SUCCESS] Inserted row into patient_reports table: {db_row}")
 
         except Exception as e:
             print(f"[Supabase Exception]: {e}")
 
-    return report_entry
+    return db_row
 
 def fetch_reports_from_supabase(patient_session_id: str = None) -> List[Dict[str, Any]]:
-    """Fetches patient reports filtered by patient_session_id for patient isolation."""
+    """Fetches patient reports from Supabase Table Editor."""
     if is_supabase_configured():
         try:
             from supabase import create_client
             supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
-            query = supabase.table("patient_reports").select("*").order("created_at", desc=True)
-            if patient_session_id and patient_session_id != "ALL":
-                query = query.eq("patient_session_id", patient_session_id)
-            response = query.execute()
+            response = supabase.table("patient_reports").select("*").order("created_at", desc=True).execute()
             if response.data:
                 return response.data
         except Exception as e:

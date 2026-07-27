@@ -122,10 +122,18 @@ def download_powerbi_dataset():
 
 
 @app.post("/predict", response_model=PredictionResponse)
-def predict_diabetes_risk(payload: PatientLabInput):
+def predict_diabetes_risk(
+    payload: PatientLabInput,
+    patient_session_id: Optional[str] = Header(None, alias="x-patient-session-id")
+):
     try:
         lab_dict = payload.dict()
         result = inference_service.predict(lab_dict)
+        
+        # Insert record directly into Supabase Table Editor!
+        session_id = patient_session_id or "session_default"
+        add_saved_report(lab_dict, result, patient_session_id=session_id)
+        
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Inference error: {str(e)}")
