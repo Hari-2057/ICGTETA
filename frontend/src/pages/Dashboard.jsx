@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
+import { savePredictionToSupabase } from '../services/supabaseClient';
 import { generateClientPdfReport } from '../utils/pdfGenerator';
 import { PdfReportUploader } from '../components/PdfReportUploader';
 import { LabInputForm } from '../components/LabInputForm';
@@ -84,6 +85,8 @@ export const Dashboard = ({
     try {
       const res = await api.predict(filledPayload);
       setPrediction(res);
+      // Auto-save evaluation to Supabase Table Editor
+      savePredictionToSupabase(filledPayload, res);
     } catch (err) {
       console.error('Inference error:', err);
     } finally {

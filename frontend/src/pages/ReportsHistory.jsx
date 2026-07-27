@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../services/api';
+import { fetchSessionReportsFromSupabase } from '../services/supabaseClient';
 import { generateClientPdfReport } from '../utils/pdfGenerator';
-import { FileText, Download, Search, Calendar, Filter, ArrowRight, Database, Cloud } from 'lucide-react';
+import { FileText, Download, Search, Calendar, Filter, ArrowRight, Cloud } from 'lucide-react';
 
 export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
   const [reports, setReports] = useState([]);
@@ -16,8 +17,15 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
   const fetchReports = async () => {
     setLoading(true);
     try {
-      const data = await api.getReports();
-      setReports(data);
+      // 1. Try live Supabase query
+      const supabaseData = await fetchSessionReportsFromSupabase();
+      if (supabaseData && supabaseData.length > 0) {
+        setReports(supabaseData);
+      } else {
+        // 2. Fallback to API/Local index
+        const apiData = await api.getReports();
+        setReports(apiData);
+      }
     } catch (err) {
       console.error('Failed to load reports history:', err);
     } finally {
@@ -27,7 +35,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
 
   const filteredReports = reports.filter(item => {
     const matchesSearch = 
-      item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.id && item.id.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (item.filename && item.filename.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (item.patient_age && item.patient_age.toString().includes(searchQuery));
       
@@ -47,8 +55,8 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
   };
 
   const handleDownload = (item) => {
-    if (item.pdf_url) {
-      window.open(item.pdf_url, '_blank');
+    if (item.generated_pdf_url) {
+      window.open(item.generated_pdf_url, '_blank');
       return;
     }
 
@@ -79,7 +87,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
       gender: item.patient_gender,
       hba1c: item.hba1c,
       fasting_glucose: item.fasting_glucose,
-      random_glucose: item.fasting_glucose ? item.fasting_glucose + 25 : 140,
+      random_glucose: item.random_glucose || (item.fasting_glucose ? item.fasting_glucose + 25 : 140),
       bmi: 26.5
     };
 
@@ -101,11 +109,11 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
               </h2>
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 flex items-center space-x-1">
                 <Cloud className="w-3 h-3 text-cyan-400" />
-                <span>Supabase & Cloud Ready</span>
+                <span>Supabase Live Table Editor</span>
               </span>
             </div>
             <p className="text-xs text-slate-300 mt-1">
-              Access, filter, inspect, and download all past clinical decision reports. Integrates with Supabase PostgreSQL & Supabase Storage.
+              Access, filter, inspect, and download past patient evaluation reports saved in your Supabase PostgreSQL table.
             </p>
           </div>
         </div>
@@ -143,7 +151,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
       {loading ? (
         <div className="flex items-center justify-center h-48 text-slate-500 text-xs font-semibold">
           <span className="w-4 h-4 border-2 border-cyan-600 border-t-transparent rounded-full animate-spin mr-2"></span>
-          Fetching Patient Reports from Supabase / Backend Storage...
+          Fetching Patient Reports from Supabase Table Editor...
         </div>
       ) : filteredReports.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -209,7 +217,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center text-slate-500 text-xs font-medium">
-          No saved patient reports matched your search criteria.
+          No saved patient reports found in Supabase Table Editor for this session. Run a CDSS Risk Assessment to insert your first record!
         </div>
       )}
     </div>
