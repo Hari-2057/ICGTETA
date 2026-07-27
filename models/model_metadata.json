@@ -1,0 +1,97 @@
+{
+    "dataset_records": 3500,
+    "total_features": 47,
+    "feature_list": [
+        "age",
+        "gender",
+        "bmi",
+        "weight",
+        "height",
+        "systolic_bp",
+        "diastolic_bp",
+        "waist_circ",
+        "smoking_status",
+        "alcohol_consumption",
+        "physical_activity",
+        "family_history",
+        "hba1c",
+        "fasting_glucose",
+        "random_glucose",
+        "hemoglobin",
+        "rbc_count",
+        "wbc_count",
+        "platelet_count",
+        "hematocrit",
+        "mcv",
+        "mch",
+        "mchc",
+        "total_cholesterol",
+        "hdl",
+        "ldl",
+        "vldl",
+        "triglycerides",
+        "creatinine",
+        "bun",
+        "uric_acid",
+        "alt",
+        "ast",
+        "alp",
+        "bilirubin",
+        "sodium",
+        "potassium",
+        "chloride",
+        "tyg_index",
+        "glucose_hba1c_ratio",
+        "glucose_tg_ratio",
+        "ast_alt_ratio",
+        "bun_creatinine_ratio",
+        "tc_hdl_ratio",
+        "tg_hdl_ratio",
+        "mean_arterial_pressure",
+        "metabolic_risk_score"
+    ],
+    "best_hyperparameters": {
+        "n_estimators": 234,
+        "max_depth": 5,
+        "learning_rate": 0.04498689966928784,
+        "subsample": 0.616289071710824,
+        "colsample_bytree": 0.6855110553983031,
+        "random_state": 42
+    },
+    "metrics": {
+        "classification": {
+            "accuracy": 0.9957142857142857,
+            "precision": 0.9957276368491321,
+            "recall": 0.9957142857142857,
+            "f1_score": 0.9957172456548169,
+            "roc_auc": 0.999984394398766,
+            "confusion_matrix": [
+                [
+                    312,
+                    1,
+                    0
+                ],
+                [
+                    1,
+                    212,
+                    0
+                ],
+                [
+                    0,
+                    1,
+                    173
+                ]
+            ],
+            "classes": [
+                "Healthy",
+                "Prediabetes",
+                "Type 2 Diabetes"
+            ]
+        },
+        "regression": {
+            "mae": 0.6219037462234498,
+            "rmse": 1.305442182854412,
+            "r2_score": 0.9927065943483443
+        }
+    }
+}
