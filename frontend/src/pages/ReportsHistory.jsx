@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../services/api';
 import { generateClientPdfReport } from '../utils/pdfGenerator';
-import { FileText, Download, Search, Calendar, User, Filter, ArrowRight, ShieldCheck, AlertTriangle, AlertOctagon } from 'lucide-react';
+import { FileText, Download, Search, Calendar, Filter, ArrowRight, Database, Cloud } from 'lucide-react';
 
 export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
   const [reports, setReports] = useState([]);
@@ -28,7 +28,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
   const filteredReports = reports.filter(item => {
     const matchesSearch = 
       item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.filename.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.filename && item.filename.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (item.patient_age && item.patient_age.toString().includes(searchQuery));
       
     const matchesFilter = filterClass === 'ALL' || item.predicted_class === filterClass;
@@ -47,6 +47,11 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
   };
 
   const handleDownload = (item) => {
+    if (item.pdf_url) {
+      window.open(item.pdf_url, '_blank');
+      return;
+    }
+
     const mockPrediction = {
       predicted_class: item.predicted_class,
       confidence_score: item.confidence_score || 95.0,
@@ -94,12 +99,13 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
               <h2 className="text-xl font-extrabold tracking-tight">
                 Saved Patient Reports & Evaluation History
               </h2>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">
-                Backend Storage: reports/
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 flex items-center space-x-1">
+                <Cloud className="w-3 h-3 text-cyan-400" />
+                <span>Supabase & Cloud Ready</span>
               </span>
             </div>
             <p className="text-xs text-slate-300 mt-1">
-              Access, filter, inspect, and download all past clinical decision reports saved in the system backend.
+              Access, filter, inspect, and download all past clinical decision reports. Integrates with Supabase PostgreSQL & Supabase Storage.
             </p>
           </div>
         </div>
@@ -137,7 +143,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
       {loading ? (
         <div className="flex items-center justify-center h-48 text-slate-500 text-xs font-semibold">
           <span className="w-4 h-4 border-2 border-cyan-600 border-t-transparent rounded-full animate-spin mr-2"></span>
-          Loading Saved Patient Reports from backend/reports...
+          Fetching Patient Reports from Supabase / Backend Storage...
         </div>
       ) : filteredReports.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -154,7 +160,7 @@ export const ReportsHistory = ({ onLoadReportToWorkspace }) => {
                     </h3>
                     <div className="flex items-center space-x-2 text-[10px] text-slate-500 mt-0.5 font-medium">
                       <Calendar className="w-3 h-3 text-slate-400" />
-                      <span>{item.timestamp}</span>
+                      <span>{item.timestamp || item.created_at}</span>
                     </div>
                   </div>
                 </div>
