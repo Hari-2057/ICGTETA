@@ -3,8 +3,9 @@ import json
 import time
 from typing import List, Dict, Any
 
+DEFAULT_SUPABASE_KEY = "sb_publishable_LkPBGMkAOATPB2qUxBz0cA_2egzKInV"
 SUPABASE_URL = os.getenv("SUPABASE_URL", "")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", DEFAULT_SUPABASE_KEY)
 
 def is_supabase_configured() -> bool:
     return bool(SUPABASE_URL and SUPABASE_KEY)
