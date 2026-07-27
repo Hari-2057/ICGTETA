@@ -144,20 +144,20 @@ export const Dashboard = ({
               <SeverityCard prediction={prediction} />
             </>
           ) : (
-            <div className="bg-slate-900/90 rounded-2xl border border-slate-800 p-8 shadow-xl text-center flex flex-col items-center justify-center min-h-[420px] space-y-4">
-              <div className="p-4 rounded-2xl bg-cyan-950/60 text-cyan-400 border border-cyan-800/60 shadow-lg">
+            <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-xl text-center flex flex-col items-center justify-center min-h-[420px] space-y-4">
+              <div className="p-4 rounded-2xl bg-cyan-50 text-cyan-600 border border-cyan-200 shadow-md">
                 <Stethoscope className="w-10 h-10 animate-bounce" />
               </div>
               <div className="space-y-1.5">
-                <h3 className="text-lg font-bold text-slate-100">
+                <h3 className="text-lg font-extrabold text-slate-900">
                   Ready for Patient Risk Assessment
                 </h3>
-                <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-                  Upload a patient blood test PDF report above or enter mandatory laboratory biomarkers (<span className="text-cyan-400 font-semibold">HbA1c, Fasting Glucose, Random Glucose</span>) and click <span className="text-cyan-300 font-semibold font-mono">Run CDSS Risk Assessment</span>.
+                <p className="text-xs text-slate-500 max-w-sm leading-relaxed font-medium">
+                  Upload a patient blood test PDF report above or enter mandatory laboratory biomarkers (<span className="text-cyan-700 font-bold">HbA1c, Fasting Glucose, Random Glucose</span>) and click <span className="text-cyan-700 font-bold font-mono">Run CDSS Risk Assessment</span>.
                 </p>
               </div>
-              <div className="pt-2 flex items-center space-x-2 text-[11px] font-semibold text-cyan-400 bg-cyan-950/40 px-3 py-1.5 rounded-full border border-cyan-800/40">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="pt-2 flex items-center space-x-2 text-[11px] font-extrabold text-cyan-800 bg-cyan-50 px-3.5 py-1.5 rounded-full border border-cyan-200 shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
                 <span>ADA & WHO Diagnostic Standards Engine</span>
               </div>
             </div>

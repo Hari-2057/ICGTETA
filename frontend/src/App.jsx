@@ -56,7 +56,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -83,12 +83,12 @@ export function App() {
         {activeTab === 'methodology' && <Methodology />}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-400">
-        <p>
+      {/* Pristine Light Footer */}
+      <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-600">
+        <p className="font-medium">
           Clinical Decision Support System (CDSS) for Diabetes Risk Assessment & Conformal Explainability.
         </p>
-        <p className="mt-1 text-slate-400 font-mono">
+        <p className="mt-1 text-slate-500 font-mono text-[11px]">
           Engineered with XGBoost, SHAP TreeExplainer, MAPIE Conformal Calibration, FastAPI & React.
         </p>
       </footer>
