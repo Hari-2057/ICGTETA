@@ -21,3 +21,4 @@ __pycache__/
 
 # Reports & scratch files
 reports/*.pdf
+.vercel

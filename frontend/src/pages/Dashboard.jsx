@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { api } from '../services/api';
+import { api, FALLBACK_PRESETS, computeFallbackPrediction } from '../services/api';
 import { PatientPresets } from '../components/PatientPresets';
 import { LabInputForm } from '../components/LabInputForm';
 import { RiskGauge } from '../components/RiskGauge';
@@ -20,25 +20,26 @@ const DEFAULT_LAB_DATA = {
 };
 
 export const Dashboard = ({ onOpenMetricsModal }) => {
-  const [presets, setPresets] = useState([]);
+  const [presets, setPresets] = useState(FALLBACK_PRESETS);
   const [activePresetId, setActivePresetId] = useState(null);
   const [labData, setLabData] = useState(DEFAULT_LAB_DATA);
-  const [prediction, setPrediction] = useState(null);
+  const [prediction, setPrediction] = useState(() => computeFallbackPrediction(DEFAULT_LAB_DATA));
   const [isLoading, setIsLoading] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     fetchPresets();
-    // Run initial prediction on default lab data
     handlePredict(DEFAULT_LAB_DATA);
   }, []);
 
   const fetchPresets = async () => {
     try {
       const data = await api.getPresets();
-      setPresets(data);
-    } catch (err) {
-      console.error('Failed to fetch presets:', err);
+      if (Array.isArray(data) && data.length > 0) {
+        setPresets(data);
+      }
+    } catch {
+      setPresets(FALLBACK_PRESETS);
     }
   };
 
@@ -54,7 +55,8 @@ export const Dashboard = ({ onOpenMetricsModal }) => {
       const res = await api.predict(dataToPredict);
       setPrediction(res);
     } catch (err) {
-      console.error('Inference error:', err);
+      console.warn('Using client fallback calculation:', err);
+      setPrediction(computeFallbackPrediction(dataToPredict));
     } finally {
       setIsLoading(false);
     }
@@ -91,7 +93,7 @@ export const Dashboard = ({ onOpenMetricsModal }) => {
         onSelectPreset={handleSelectPreset}
       />
 
-      {/* Main Workspace Layout */}
+      {/* Main Workspace Grid - Fully Responsive */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: 39 Lab Inputs */}
         <div className="lg:col-span-7">
