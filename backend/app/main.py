@@ -2,7 +2,8 @@ import os
 import io
 import json
 import uuid
-from fastapi import FastAPI, HTTPException, UploadFile, File, Response
+from typing import Optional
+from fastapi import FastAPI, HTTPException, UploadFile, File, Response, Query, Header
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
 
@@ -61,17 +62,20 @@ def get_model_info():
 
 
 @app.get("/reports")
-def list_saved_patient_reports():
+def list_saved_patient_reports(patient_session_id: Optional[str] = Query(None)):
     """
-    Returns list of saved patient evaluation reports stored in reports/ backend directory.
+    Returns saved patient evaluation reports filtered by patient_session_id for strict patient isolation.
     """
-    return get_all_reports()
+    return get_all_reports(patient_session_id)
 
 
 @app.post("/upload-report-pdf")
-async def upload_patient_pdf(file: UploadFile = File(...)):
+async def upload_patient_pdf(
+    file: UploadFile = File(...),
+    patient_session_id: Optional[str] = Header(None, alias="x-patient-session-id")
+):
     """
-    Parses an uploaded patient blood test PDF report and returns extracted biomarkers.
+    Parses an uploaded patient blood test PDF report, saves raw PDF to storage, and returns extracted biomarkers.
     """
     if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF report files are supported.")
@@ -128,14 +132,18 @@ def predict_diabetes_risk(payload: PatientLabInput):
 
 
 @app.post("/generate-report")
-def download_clinical_report(payload: PatientLabInput):
+def download_clinical_report(
+    payload: PatientLabInput,
+    patient_session_id: Optional[str] = Header(None, alias="x-patient-session-id")
+):
     try:
         lab_dict = payload.dict()
         prediction = inference_service.predict(lab_dict)
         pdf_bytes = generate_pdf_report_bytes(prediction, lab_dict)
         
-        # Save entry into report history manager
-        add_saved_report(lab_dict, prediction)
+        # Save entry into report history manager filtered by patient_session_id
+        session_id = patient_session_id or "session_default"
+        add_saved_report(lab_dict, prediction, generated_pdf_bytes=pdf_bytes, patient_session_id=session_id)
         
         filename = f"Clinical_CDSS_Diabetes_Report_{uuid.uuid4().hex[:6]}.pdf"
         return Response(
