@@ -1,29 +1,25 @@
-import os
+import io
 import uuid
 from typing import Dict, Any
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, HRFlowable
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from backend.app.config import REPORTS_DIR
 
-def generate_pdf_report(prediction_data: Dict[str, Any], patient_data: Dict[str, Any]) -> str:
+def generate_pdf_report_bytes(prediction_data: Dict[str, Any], patient_data: Dict[str, Any]) -> bytes:
     """
-    Generates a structured clinical decision report as a PDF artifact.
-    Returns absolute filepath of the generated PDF.
+    Generates a structured clinical decision support PDF report in-memory.
+    Returns raw PDF bytes (compatible with serverless environments like Vercel).
     """
-    filename = f"CDSS_Diabetes_Report_{uuid.uuid4().hex[:8]}.pdf"
-    filepath = os.path.join(REPORTS_DIR, filename)
-
-    doc = SimpleDocTemplate(filepath, pagesize=letter, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=36)
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=36)
     styles = getSampleStyleSheet()
 
-    # Custom styles
     title_style = ParagraphStyle(
         'DocTitle',
         parent=styles['Heading1'],
-        fontSize=20,
-        leading=24,
+        fontSize=18,
+        leading=22,
         textColor=colors.HexColor('#0F172A'),
         fontName='Helvetica-Bold'
     )
@@ -40,8 +36,8 @@ def generate_pdf_report(prediction_data: Dict[str, Any], patient_data: Dict[str,
     section_heading = ParagraphStyle(
         'SectionHeading',
         parent=styles['Heading2'],
-        fontSize=13,
-        leading=16,
+        fontSize=12,
+        leading=15,
         textColor=colors.HexColor('#1E293B'),
         fontName='Helvetica-Bold',
         spaceBefore=10,
@@ -61,10 +57,10 @@ def generate_pdf_report(prediction_data: Dict[str, Any], patient_data: Dict[str,
     # Title & Header
     story.append(Paragraph("Clinical Decision Support System (CDSS)", title_style))
     story.append(Paragraph("Diabetes Risk Assessment & Conformal Explainability Report", subtitle_style))
-    story.append(Spacer(1, 10))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#2563EB'), spaceAfter=15))
+    story.append(Spacer(1, 8))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor('#2563EB'), spaceAfter=12))
 
-    # Patient Demographic & Key Vitals Table
+    # Patient Overview Table
     story.append(Paragraph("Patient Overview & Mandatory Biomarkers", section_heading))
     patient_table_data = [
         ["Age / Gender:", f"{patient_data.get('age', 'N/A')} yrs / {patient_data.get('gender', 'N/A')}", "BMI:", f"{patient_data.get('bmi', 'N/A')} kg/m²"],
@@ -78,12 +74,12 @@ def generate_pdf_report(prediction_data: Dict[str, Any], patient_data: Dict[str,
         ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
         ('FONTSIZE', (0,0), (-1,-1), 9),
         ('TEXTCOLOR', (0,0), (-1,-1), colors.HexColor('#1E293B')),
-        ('PADDING', (0,0), (-1,-1), 6),
+        ('PADDING', (0,0), (-1,-1), 5),
     ]))
     story.append(t_patient)
-    story.append(Spacer(1, 12))
+    story.append(Spacer(1, 10))
 
-    # Prediction Summary Box
+    # Prediction Box
     story.append(Paragraph("Model Diagnostic Classification & Conformal Calibration", section_heading))
     pred_class = prediction_data.get("predicted_class", "N/A")
     conf_score = prediction_data.get("confidence_score", 0.0)
@@ -103,11 +99,11 @@ def generate_pdf_report(prediction_data: Dict[str, Any], patient_data: Dict[str,
         ('BACKGROUND', (0,0), (-1,-1), bg_color),
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#CBD5E1')),
         ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold'),
-        ('FONTSIZE', (0,0), (-1,-1), 9.5),
-        ('PADDING', (0,0), (-1,-1), 6),
+        ('FONTSIZE', (0,0), (-1,-1), 9),
+        ('PADDING', (0,0), (-1,-1), 5),
     ]))
     story.append(t_diag)
-    story.append(Spacer(1, 12))
+    story.append(Spacer(1, 10))
 
     # SHAP Explanations
     story.append(Paragraph("Top Biomarker Feature Drivers (SHAP Analysis)", section_heading))
@@ -135,10 +131,10 @@ def generate_pdf_report(prediction_data: Dict[str, Any], patient_data: Dict[str,
         ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#E2E8F0')),
         ('FONTSIZE', (0,0), (-1,-1), 8.5),
-        ('PADDING', (0,0), (-1,-1), 5),
+        ('PADDING', (0,0), (-1,-1), 4),
     ]))
     story.append(t_shap)
-    story.append(Spacer(1, 12))
+    story.append(Spacer(1, 10))
 
     # Clinical Recommendations
     story.append(Paragraph("Actionable CDSS Clinical Recommendations", section_heading))
@@ -148,10 +144,10 @@ def generate_pdf_report(prediction_data: Dict[str, Any], patient_data: Dict[str,
         action_p = Paragraph(rec.get('action', ''), body_style)
         story.append(title_p)
         story.append(action_p)
-        story.append(Spacer(1, 6))
+        story.append(Spacer(1, 4))
 
-    # Footer Disclaimer
-    story.append(Spacer(1, 15))
+    # Disclaimer
+    story.append(Spacer(1, 10))
     disclaimer = Paragraph(
         "<i>Disclaimer: This report is generated by an AI-assisted Decision Support System (CDSS) for investigational and clinical workflow support. Final diagnosis must be confirmed by a licensed medical provider.</i>",
         subtitle_style
@@ -159,4 +155,6 @@ def generate_pdf_report(prediction_data: Dict[str, Any], patient_data: Dict[str,
     story.append(disclaimer)
 
     doc.build(story)
-    return filepath
+    pdf_bytes = buffer.getvalue()
+    buffer.close()
+    return pdf_bytes

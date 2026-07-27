@@ -1,13 +1,15 @@
 import os
+import io
 import json
+import uuid
 from fastapi import FastAPI, HTTPException, UploadFile, File, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import JSONResponse, Response
 
-from backend.app.config import MODELS_DIR, ARTIFACTS_DIR, DATA_DIR, REPORTS_DIR
+from backend.app.config import MODELS_DIR, ARTIFACTS_DIR, DATA_DIR
 from backend.app.schemas import PatientLabInput, PredictionResponse
 from backend.app.services.inference_service import inference_service
-from backend.app.services.pdf_service import generate_pdf_report
+from backend.app.services.pdf_service import generate_pdf_report_bytes
 from src.pdf_parser import parse_patient_pdf_bytes
 from data.export_powerbi_dataset import generate_powerbi_csv
 
@@ -26,7 +28,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Anti-caching middleware
+# Strict anti-caching middleware
 @app.middleware("http")
 async def add_no_cache_headers(request, call_next):
     response = await call_next(request)
@@ -77,7 +79,7 @@ async def upload_patient_pdf(file: UploadFile = File(...)):
 
 @app.get("/sample-lab-pdf")
 def download_sample_lab_pdf():
-    """Generates and returns a sample patient lab PDF report for 1-click testing."""
+    """Generates and returns in-memory sample patient lab PDF report."""
     sample_patient = {
         "age": 52, "gender": "Female", "bmi": 29.4, "systolic_bp": 134, "diastolic_bp": 86,
         "hba1c": 6.2, "fasting_glucose": 118, "random_glucose": 155,
@@ -85,15 +87,25 @@ def download_sample_lab_pdf():
         "creatinine": 1.0, "bun": 16, "alt": 34, "ast": 28
     }
     sample_prediction = inference_service.predict(sample_patient)
-    pdf_path = generate_pdf_report(sample_prediction, sample_patient)
-    return FileResponse(pdf_path, media_type="application/pdf", filename="Sample_Patient_Blood_Lab_Report.pdf")
+    pdf_bytes = generate_pdf_report_bytes(sample_prediction, sample_patient)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=Sample_Patient_Blood_Lab_Report.pdf"}
+    )
 
 
 @app.get("/powerbi-dataset")
 def download_powerbi_dataset():
-    """Returns Power BI optimized model performance CSV dataset."""
+    """Returns Power BI optimized model performance CSV dataset in-memory."""
     csv_path = generate_powerbi_csv(MODELS_DIR, DATA_DIR)
-    return FileResponse(csv_path, media_type="text/csv", filename="model_performance_powerbi_dataset.csv")
+    with open(csv_path, "r") as f:
+        csv_content = f.read()
+    return Response(
+        content=csv_content,
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=model_performance_powerbi_dataset.csv"}
+    )
 
 
 @app.post("/predict", response_model=PredictionResponse)
@@ -111,8 +123,12 @@ def download_clinical_report(payload: PatientLabInput):
     try:
         lab_dict = payload.dict()
         prediction = inference_service.predict(lab_dict)
-        pdf_path = generate_pdf_report(prediction, lab_dict)
-        filename = os.path.basename(pdf_path)
-        return FileResponse(pdf_path, media_type="application/pdf", filename=filename)
+        pdf_bytes = generate_pdf_report_bytes(prediction, lab_dict)
+        filename = f"Clinical_CDSS_Diabetes_Report_{uuid.uuid4().hex[:6]}.pdf"
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename={filename}"}
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"PDF generation error: {str(e)}")

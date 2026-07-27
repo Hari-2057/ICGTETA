@@ -6,25 +6,10 @@ const API_BASE_URL = import.meta.env.VITE_API_URL !== undefined
       ? 'http://localhost:8000'
       : '');
 
-// Fallback PDF biomarker extractor helper
-export function extractBiomarkersFromText(text) {
-  const extracted = {};
-  const hba1c = text.match(/hba1c[^\d]*(\d+\.?\d*)/i);
-  if (hba1c) extracted.hba1c = parseFloat(hba1c[1]);
-
-  const fpg = text.match(/fasting[^\d]*(\d+\.?\d*)/i);
-  if (fpg) extracted.fasting_glucose = parseFloat(fpg[1]);
-
-  const rpg = text.match(/random[^\d]*(\d+\.?\d*)/i);
-  if (rpg) extracted.random_glucose = parseFloat(rpg[1]);
-
-  return extracted;
-}
-
 export const api = {
   getHealth: async () => {
     try {
-      const res = await axios.get(`${API_BASE_URL}/health`, { timeout: 4000 });
+      const res = await axios.get(`${API_BASE_URL}/health`, { timeout: 5000 });
       return res.data;
     } catch {
       return { status: "healthy", service: "CDSS Diabetes Risk System", model_loaded: true };
@@ -33,7 +18,7 @@ export const api = {
 
   getModelInfo: async () => {
     try {
-      const res = await axios.get(`${API_BASE_URL}/model-info`, { timeout: 4000 });
+      const res = await axios.get(`${API_BASE_URL}/model-info`, { timeout: 5000 });
       return res.data;
     } catch {
       return {
@@ -59,11 +44,10 @@ export const api = {
     try {
       const res = await axios.post(`${API_BASE_URL}/upload-report-pdf`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        timeout: 8000
+        timeout: 10000
       });
       return res.data;
     } catch {
-      // Client-side fallback fallback simulation
       return {
         filename: file.name,
         extracted_count: 5,
@@ -83,23 +67,17 @@ export const api = {
     try {
       const res = await axios.get(`${API_BASE_URL}/powerbi-dataset`, {
         responseType: 'blob',
-        timeout: 5000
+        timeout: 10000
       });
-      const url = window.URL.createObjectURL(new Blob([res.data], { type: 'text/csv' }));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'model_performance_powerbi_dataset.csv');
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch {
-      alert("Downloading Power BI Dataset CSV...");
+      triggerBlobDownload(res.data, 'model_performance_powerbi_dataset.csv', 'text/csv');
+    } catch (err) {
+      console.error('Power BI download error:', err);
     }
   },
 
   predict: async (labData) => {
     try {
-      const res = await axios.post(`${API_BASE_URL}/predict`, labData, { timeout: 5000 });
+      const res = await axios.post(`${API_BASE_URL}/predict`, labData, { timeout: 6000 });
       return res.data;
     } catch {
       return computeFallbackPrediction(labData);
@@ -110,20 +88,26 @@ export const api = {
     try {
       const res = await axios.post(`${API_BASE_URL}/generate-report`, labData, {
         responseType: 'blob',
-        timeout: 8000
+        timeout: 10000
       });
-      const url = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `Clinical_CDSS_Diabetes_Report_${Date.now()}.pdf`);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch {
-      alert("Generating Clinical PDF Report...");
+      triggerBlobDownload(res.data, `Clinical_CDSS_Diabetes_Report_${Date.now()}.pdf`, 'application/pdf');
+    } catch (err) {
+      console.error('PDF report download error:', err);
     }
   }
 };
+
+function triggerBlobDownload(blobData, filename, contentType) {
+  const blob = new Blob([blobData], { type: contentType });
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', filename);
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.URL.revokeObjectURL(url);
+}
 
 function computeFallbackPrediction(labData) {
   const hba1c = Number(labData.hba1c || 5.0);
