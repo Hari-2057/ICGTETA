@@ -11,6 +11,7 @@ export function App() {
   const [isHealthy, setIsHealthy] = useState(false);
   const [isMetricsModalOpen, setIsMetricsModalOpen] = useState(false);
   const [modelInfo, setModelInfo] = useState(null);
+  const [latestPrediction, setLatestPrediction] = useState(null);
 
   useEffect(() => {
     checkHealth();
@@ -45,9 +46,17 @@ export function App() {
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {activeTab === 'dashboard' && (
-          <Dashboard onOpenMetricsModal={handleOpenMetricsModal} />
+          <Dashboard
+            onOpenMetricsModal={handleOpenMetricsModal}
+            onPredictionEvaluated={(pred) => setLatestPrediction(pred)}
+          />
         )}
-        {activeTab === 'performance' && <ModelPerformance />}
+        {activeTab === 'performance' && (
+          <ModelPerformance
+            prediction={latestPrediction}
+            onGoToWorkspace={() => setActiveTab('dashboard')}
+          />
+        )}
         {activeTab === 'methodology' && <Methodology />}
       </main>
 

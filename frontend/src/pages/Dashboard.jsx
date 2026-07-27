@@ -21,7 +21,7 @@ const EMPTY_LAB_DATA = {
   sodium: '', potassium: '', chloride: ''
 };
 
-export const Dashboard = () => {
+export const Dashboard = ({ onPredictionEvaluated }) => {
   const [labData, setLabData] = useState(EMPTY_LAB_DATA);
   const [prediction, setPrediction] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -94,6 +94,9 @@ export const Dashboard = () => {
     try {
       const res = await api.predict(filledPayload);
       setPrediction(res);
+      if (onPredictionEvaluated) {
+        onPredictionEvaluated(res);
+      }
     } catch (err) {
       console.error('Inference error:', err);
     } finally {
@@ -116,7 +119,6 @@ export const Dashboard = () => {
     if (!prediction) return;
     setIsDownloading(true);
     try {
-      // 100% Reliable Client & Server Dual PDF Download Trigger
       const success = await api.generateReport(labData);
       if (!success) {
         generateClientPdfReport(prediction, labData);
