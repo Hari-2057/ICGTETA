@@ -4,10 +4,9 @@ import time
 from typing import List, Dict, Any
 
 DEFAULT_SUPABASE_URL = "https://swxwtlqvpmbrzwjbvmva.supabase.co"
-DEFAULT_SUPABASE_KEY = "sb_publishable_LkPBGMkAOATPB2qUxBz0cA_2egzKInV"
 
 SUPABASE_URL = os.getenv("SUPABASE_URL", DEFAULT_SUPABASE_URL)
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", DEFAULT_SUPABASE_KEY)
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", os.getenv("VITE_SUPABASE_KEY", "sb_publishable_LkPBGMkAOATPB2qUxBz0cA_2egzKInV"))
 
 def is_supabase_configured() -> bool:
     return bool(SUPABASE_URL and SUPABASE_KEY)
@@ -21,6 +20,7 @@ def save_report_to_supabase(
 ) -> Dict[str, Any]:
     """
     Saves report metadata, raw uploaded PDF, and generated clinical PDF to Supabase Database & Storage.
+    Reads SUPABASE_KEY from environment variables.
     """
     report_id = f"CDSS_Report_{int(time.time())}"
     report_entry = {
@@ -68,7 +68,7 @@ def save_report_to_supabase(
             print(f"[Supabase] Successfully inserted record {report_id} into patient_reports table!")
 
         except Exception as e:
-            print(f"[Supabase Sync Exception]: {e}")
+            print(f"[Supabase Exception]: {e}")
 
     return report_entry
 
