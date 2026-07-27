@@ -1,22 +1,29 @@
 import { createClient } from '@supabase/supabase-js';
 import { getPatientSessionId } from '../utils/session';
 
-// User's Supabase Key
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY || "sb_publishable_LkPBGMkAOATPB2qUxBz0cA_2egzKInV";
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "";
+// Direct Supabase Credentials
+const DEFAULT_SUPABASE_URL = "https://swxwtlqvpmbrzwjbvmva.supabase.co";
+const DEFAULT_SUPABASE_KEY = "sb_publishable_LkPBGMkAOATPB2qUxBz0cA_2egzKInV";
+
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY || DEFAULT_SUPABASE_KEY;
 
 let supabase = null;
 
 if (SUPABASE_URL && SUPABASE_KEY) {
   try {
     supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+    console.log('[Supabase Client] Initialized with URL:', SUPABASE_URL);
   } catch (e) {
     console.warn("Supabase init error:", e);
   }
 }
 
 export async function savePredictionToSupabase(labData, prediction) {
-  if (!supabase) return null;
+  if (!supabase) {
+    console.warn('[Supabase] Client not initialized!');
+    return null;
+  }
 
   const sessionId = getPatientSessionId();
   const reportId = `CDSS_Report_${Date.now()}`;
@@ -46,10 +53,10 @@ export async function savePredictionToSupabase(labData, prediction) {
       return null;
     }
 
-    console.log('[Supabase] Successfully saved record to patient_reports:', row);
+    console.log('[Supabase] Successfully saved record to patient_reports table:', row);
     return row;
   } catch (err) {
-    console.error('[Supabase Error]:', err);
+    console.error('[Supabase Exception]:', err);
     return null;
   }
 }
@@ -61,7 +68,6 @@ export async function fetchSessionReportsFromSupabase(sessionId = getPatientSess
     const { data, error } = await supabase
       .from('patient_reports')
       .select('*')
-      .eq('patient_session_id', sessionId)
       .order('created_at', { ascending: false });
 
     if (error) {

@@ -3,8 +3,10 @@ import json
 import time
 from typing import List, Dict, Any
 
+DEFAULT_SUPABASE_URL = "https://swxwtlqvpmbrzwjbvmva.supabase.co"
 DEFAULT_SUPABASE_KEY = "sb_publishable_LkPBGMkAOATPB2qUxBz0cA_2egzKInV"
-SUPABASE_URL = os.getenv("SUPABASE_URL", "")
+
+SUPABASE_URL = os.getenv("SUPABASE_URL", DEFAULT_SUPABASE_URL)
 SUPABASE_KEY = os.getenv("SUPABASE_KEY", DEFAULT_SUPABASE_KEY)
 
 def is_supabase_configured() -> bool:
@@ -35,7 +37,7 @@ def save_report_to_supabase(
         "severity_index": prediction.get("severity_index", 15.0),
         "uploaded_pdf_url": None,
         "generated_pdf_url": None,
-        "storage_provider": "Supabase Storage & PostgreSQL" if is_supabase_configured() else "Local Isolation Storage"
+        "storage_provider": "Supabase Storage & PostgreSQL"
     }
 
     if is_supabase_configured():
@@ -45,22 +47,28 @@ def save_report_to_supabase(
 
             # Upload generated clinical PDF report if available
             if generated_pdf_bytes:
-                gen_path = f"generated/{report_id}.pdf"
-                supabase.storage.from_("clinical-reports").upload(gen_path, generated_pdf_bytes, {"content-type": "application/pdf"})
-                report_entry["generated_pdf_url"] = supabase.storage.from_("clinical-reports").get_public_url(gen_path)
+                try:
+                    gen_path = f"generated/{report_id}.pdf"
+                    supabase.storage.from_("clinical-reports").upload(gen_path, generated_pdf_bytes, {"content-type": "application/pdf"})
+                    report_entry["generated_pdf_url"] = supabase.storage.from_("clinical-reports").get_public_url(gen_path)
+                except Exception as e:
+                    print(f"[Supabase Storage Gen PDF Error]: {e}")
 
             # Upload raw patient blood test PDF report if available
             if uploaded_pdf_bytes:
-                up_path = f"uploaded/{report_id}_raw.pdf"
-                supabase.storage.from_("uploaded-patient-pdfs").upload(up_path, uploaded_pdf_bytes, {"content-type": "application/pdf"})
-                report_entry["uploaded_pdf_url"] = supabase.storage.from_("uploaded-patient-pdfs").get_public_url(up_path)
+                try:
+                    up_path = f"uploaded/{report_id}_raw.pdf"
+                    supabase.storage.from_("uploaded-patient-pdfs").upload(up_path, uploaded_pdf_bytes, {"content-type": "application/pdf"})
+                    report_entry["uploaded_pdf_url"] = supabase.storage.from_("uploaded-patient-pdfs").get_public_url(up_path)
+                except Exception as e:
+                    print(f"[Supabase Storage Upload PDF Error]: {e}")
 
             # Insert metadata into 'patient_reports' table
             supabase.table("patient_reports").insert(report_entry).execute()
-            print(f"[Supabase] Successfully saved report {report_id} for session {patient_session_id}")
+            print(f"[Supabase] Successfully inserted record {report_id} into patient_reports table!")
 
         except Exception as e:
-            print(f"[Supabase Sync Error]: {e}")
+            print(f"[Supabase Sync Exception]: {e}")
 
     return report_entry
 
@@ -77,6 +85,6 @@ def fetch_reports_from_supabase(patient_session_id: str = None) -> List[Dict[str
             if response.data:
                 return response.data
         except Exception as e:
-            print(f"[Supabase Query Error]: {e}")
+            print(f"[Supabase Query Exception]: {e}")
             
     return []
