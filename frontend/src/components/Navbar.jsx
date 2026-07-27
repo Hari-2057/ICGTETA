@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stethoscope, Activity, Cpu, BookOpen } from 'lucide-react';
+import { Stethoscope, Activity, Cpu, BookOpen, FileText } from 'lucide-react';
 
 export const Navbar = ({ activeTab, setActiveTab, isHealthy }) => {
   return (
@@ -43,6 +43,18 @@ export const Navbar = ({ activeTab, setActiveTab, isHealthy }) => {
             >
               <Activity className="w-4 h-4 text-cyan-600" />
               <span>Workspace</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('reports')}
+              className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all duration-200 ${
+                activeTab === 'reports'
+                  ? 'bg-white text-blue-700 border border-blue-200/90 shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+              }`}
+            >
+              <FileText className="w-4 h-4 text-blue-600" />
+              <span>Patient Reports</span>
             </button>
 
             <button

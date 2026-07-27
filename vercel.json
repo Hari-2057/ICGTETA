@@ -47,6 +47,10 @@
       "dest": "api/index.py"
     },
     {
+      "src": "/reports",
+      "dest": "api/index.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "frontend/$1"
     }

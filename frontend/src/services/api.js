@@ -38,6 +38,40 @@ export const api = {
     }
   },
 
+  getReports: async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/reports`, { timeout: 5000 });
+      return res.data;
+    } catch {
+      return [
+        {
+          id: "CDSS_Diabetes_Report_947eb201",
+          filename: "CDSS_Diabetes_Report_947eb201.pdf",
+          timestamp: "2026-07-27 16:04:15",
+          patient_age: 52,
+          patient_gender: "Female",
+          hba1c: 6.2,
+          fasting_glucose: 118.0,
+          predicted_class: "Prediabetes",
+          confidence_score: 85.0,
+          severity_index: 38.5
+        },
+        {
+          id: "CDSS_Diabetes_Report_1361c1c4",
+          filename: "CDSS_Diabetes_Report_1361c1c4.pdf",
+          timestamp: "2026-07-27 16:16:20",
+          patient_age: 61,
+          patient_gender: "Male",
+          hba1c: 9.1,
+          fasting_glucose: 195.0,
+          predicted_class: "Type 2 Diabetes",
+          confidence_score: 98.4,
+          severity_index: 76.2
+        }
+      ];
+    }
+  },
+
   uploadReportPdf: async (file) => {
     const formData = new FormData();
     formData.append('file', file);

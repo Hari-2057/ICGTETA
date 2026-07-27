@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Dashboard } from './pages/Dashboard';
+import { ReportsHistory } from './pages/ReportsHistory';
 import { ModelPerformance } from './pages/ModelPerformance';
 import { Methodology } from './pages/Methodology';
 import { ModelMetricsModal } from './components/ModelMetricsModal';
@@ -55,6 +56,19 @@ export function App() {
     setPrediction(null);
   };
 
+  const handleLoadReportToWorkspace = (item) => {
+    setLabData(prev => ({
+      ...prev,
+      age: item.patient_age || 50,
+      gender: item.patient_gender || 'Female',
+      hba1c: item.hba1c || 6.2,
+      fasting_glucose: item.fasting_glucose || 118.0,
+      random_glucose: item.fasting_glucose ? item.fasting_glucose + 25 : 145.0,
+      bmi: 27.5
+    }));
+    setActiveTab('dashboard');
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       <Navbar
@@ -72,6 +86,11 @@ export function App() {
             setPrediction={setPrediction}
             onClearForm={handleClearForm}
             onOpenMetricsModal={handleOpenMetricsModal}
+          />
+        )}
+        {activeTab === 'reports' && (
+          <ReportsHistory
+            onLoadReportToWorkspace={handleLoadReportToWorkspace}
           />
         )}
         {activeTab === 'performance' && (

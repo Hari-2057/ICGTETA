@@ -11,6 +11,7 @@ from backend.app.schemas import PatientLabInput, PredictionResponse
 from backend.app.services.inference_service import inference_service
 from backend.app.services.pdf_service import generate_pdf_report_bytes
 from src.pdf_parser import parse_patient_pdf_bytes
+from src.report_history_manager import get_all_reports, add_saved_report
 from data.export_powerbi_dataset import generate_powerbi_csv
 
 app = FastAPI(
@@ -57,6 +58,14 @@ def get_model_info():
     with open(metadata_path, "r") as f:
         data = json.load(f)
     return data
+
+
+@app.get("/reports")
+def list_saved_patient_reports():
+    """
+    Returns list of saved patient evaluation reports stored in reports/ backend directory.
+    """
+    return get_all_reports()
 
 
 @app.post("/upload-report-pdf")
@@ -124,6 +133,10 @@ def download_clinical_report(payload: PatientLabInput):
         lab_dict = payload.dict()
         prediction = inference_service.predict(lab_dict)
         pdf_bytes = generate_pdf_report_bytes(prediction, lab_dict)
+        
+        # Save entry into report history manager
+        add_saved_report(lab_dict, prediction)
+        
         filename = f"Clinical_CDSS_Diabetes_Report_{uuid.uuid4().hex[:6]}.pdf"
         return Response(
             content=pdf_bytes,
