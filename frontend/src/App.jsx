@@ -6,12 +6,26 @@ import { Methodology } from './pages/Methodology';
 import { ModelMetricsModal } from './components/ModelMetricsModal';
 import { api } from './services/api';
 
+const INITIAL_EMPTY_LAB_DATA = {
+  hba1c: '', fasting_glucose: '', random_glucose: '',
+  age: '', gender: 'Female', bmi: '', weight: '', height: '',
+  systolic_bp: '', diastolic_bp: '', waist_circ: '',
+  smoking_status: 'Never', alcohol_consumption: 'None', physical_activity: 'Moderate', family_history: 'No',
+  hemoglobin: '', rbc_count: '', wbc_count: '', platelet_count: '', hematocrit: '', mcv: '', mch: '', mchc: '',
+  total_cholesterol: '', hdl: '', ldl: '', vldl: '', triglycerides: '',
+  creatinine: '', bun: '', uric_acid: '', alt: '', ast: '', alp: '', bilirubin: '',
+  sodium: '', potassium: '', chloride: ''
+};
+
 export function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isHealthy, setIsHealthy] = useState(false);
   const [isMetricsModalOpen, setIsMetricsModalOpen] = useState(false);
   const [modelInfo, setModelInfo] = useState(null);
-  const [latestPrediction, setLatestPrediction] = useState(null);
+  
+  // Persistent state across tab switching (preserves form values & prediction)
+  const [labData, setLabData] = useState(INITIAL_EMPTY_LAB_DATA);
+  const [prediction, setPrediction] = useState(null);
 
   useEffect(() => {
     checkHealth();
@@ -36,6 +50,11 @@ export function App() {
     }
   };
 
+  const handleClearForm = () => {
+    setLabData(INITIAL_EMPTY_LAB_DATA);
+    setPrediction(null);
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
       <Navbar
@@ -47,13 +66,17 @@ export function App() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {activeTab === 'dashboard' && (
           <Dashboard
+            labData={labData}
+            setLabData={setLabData}
+            prediction={prediction}
+            setPrediction={setPrediction}
+            onClearForm={handleClearForm}
             onOpenMetricsModal={handleOpenMetricsModal}
-            onPredictionEvaluated={(pred) => setLatestPrediction(pred)}
           />
         )}
         {activeTab === 'performance' && (
           <ModelPerformance
-            prediction={latestPrediction}
+            prediction={prediction}
             onGoToWorkspace={() => setActiveTab('dashboard')}
           />
         )}

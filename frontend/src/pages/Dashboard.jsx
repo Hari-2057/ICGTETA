@@ -10,31 +10,21 @@ import { ShapChart } from '../components/ShapChart';
 import { RecommendationsCard } from '../components/RecommendationsCard';
 import { Stethoscope, Sparkles } from 'lucide-react';
 
-const EMPTY_LAB_DATA = {
-  hba1c: '', fasting_glucose: '', random_glucose: '',
-  age: '', gender: 'Female', bmi: '', weight: '', height: '',
-  systolic_bp: '', diastolic_bp: '', waist_circ: '',
-  smoking_status: 'Never', alcohol_consumption: 'None', physical_activity: 'Moderate', family_history: 'No',
-  hemoglobin: '', rbc_count: '', wbc_count: '', platelet_count: '', hematocrit: '', mcv: '', mch: '', mchc: '',
-  total_cholesterol: '', hdl: '', ldl: '', vldl: '', triglycerides: '',
-  creatinine: '', bun: '', uric_acid: '', alt: '', ast: '', alp: '', bilirubin: '',
-  sodium: '', potassium: '', chloride: ''
-};
-
-export const Dashboard = ({ onPredictionEvaluated }) => {
-  const [labData, setLabData] = useState(EMPTY_LAB_DATA);
-  const [prediction, setPrediction] = useState(null);
+export const Dashboard = ({
+  labData,
+  setLabData,
+  prediction,
+  setPrediction,
+  onClearForm
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [validationError, setValidationError] = useState('');
 
+  // Auto-fill values ONLY when PDF is uploaded (do NOT auto-run assessment)
   const handleBiomarkersExtracted = (extractedBiomarkers) => {
-    const updatedData = { ...labData, ...extractedBiomarkers };
-    setLabData(updatedData);
+    setLabData(prev => ({ ...prev, ...extractedBiomarkers }));
     setValidationError('');
-    if (updatedData.hba1c && updatedData.fasting_glucose && updatedData.random_glucose) {
-      handlePredict(updatedData);
-    }
   };
 
   const handlePredict = async (dataToPredict = labData) => {
@@ -94,9 +84,6 @@ export const Dashboard = ({ onPredictionEvaluated }) => {
     try {
       const res = await api.predict(filledPayload);
       setPrediction(res);
-      if (onPredictionEvaluated) {
-        onPredictionEvaluated(res);
-      }
     } catch (err) {
       console.error('Inference error:', err);
     } finally {
@@ -111,8 +98,7 @@ export const Dashboard = ({ onPredictionEvaluated }) => {
 
   const handleReset = () => {
     setValidationError('');
-    setLabData(EMPTY_LAB_DATA);
-    setPrediction(null);
+    onClearForm();
   };
 
   const handleDownloadReport = async () => {
@@ -167,7 +153,7 @@ export const Dashboard = ({ onPredictionEvaluated }) => {
                   Ready for Patient Risk Assessment
                 </h3>
                 <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-                  Upload a patient blood test PDF report above or enter mandatory laboratory biomarkers (<span className="text-cyan-400 font-semibold">HbA1c, Fasting Glucose, Random Glucose</span>) to run CDSS risk analysis.
+                  Upload a patient blood test PDF report above or enter mandatory laboratory biomarkers (<span className="text-cyan-400 font-semibold">HbA1c, Fasting Glucose, Random Glucose</span>) and click <span className="text-cyan-300 font-semibold font-mono">Run CDSS Risk Assessment</span>.
                 </p>
               </div>
               <div className="pt-2 flex items-center space-x-2 text-[11px] font-semibold text-cyan-400 bg-cyan-950/40 px-3 py-1.5 rounded-full border border-cyan-800/40">

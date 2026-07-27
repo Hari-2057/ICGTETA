@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { FileText, Upload, Sparkles, CheckCircle2, AlertCircle, FilePlus, Download } from 'lucide-react';
+import { FileText, Upload, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react';
 import { api } from '../services/api';
 
 export const PdfReportUploader = ({ onBiomarkersExtracted }) => {
@@ -88,7 +88,7 @@ export const PdfReportUploader = ({ onBiomarkersExtracted }) => {
               </span>
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">
-              Upload a patient laboratory blood test PDF report to automatically extract biomarkers into the form fields.
+              Upload a patient laboratory blood test PDF report to auto-fill form fields. (Click "Run CDSS Risk Assessment" to evaluate).
             </p>
           </div>
         </div>
@@ -119,7 +119,7 @@ export const PdfReportUploader = ({ onBiomarkersExtracted }) => {
         {isUploading ? (
           <div className="flex flex-col items-center space-y-2 py-2">
             <span className="w-6 h-6 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></span>
-            <span className="text-xs font-semibold text-cyan-300">Extracting biomarkers from PDF report...</span>
+            <span className="text-xs font-semibold text-cyan-300">Extracting biomarkers into form fields...</span>
           </div>
         ) : (
           <>
@@ -131,7 +131,7 @@ export const PdfReportUploader = ({ onBiomarkersExtracted }) => {
                 Click to browse or drop patient PDF blood report here
               </span>
               <span className="text-[11px] text-slate-500 block mt-0.5">
-                Parses HbA1c, Fasting Glucose, Lipid panel, Renal & Liver biomarkers automatically
+                Parses HbA1c, Fasting Glucose, Lipid panel, Renal & Liver biomarkers into form fields
               </span>
             </div>
           </>
@@ -144,7 +144,7 @@ export const PdfReportUploader = ({ onBiomarkersExtracted }) => {
           <div className="flex items-center space-x-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
             <span>
-              Extracted <b>{extractedInfo.extracted_count}</b> biomarkers from <i>{extractedInfo.filename}</i>!
+              Extracted <b>{extractedInfo.extracted_count}</b> biomarkers into form fields! Click <b>Run CDSS Risk Assessment</b> below to analyze.
             </span>
           </div>
           <span className="text-[10px] text-emerald-400/80 font-normal">Form Auto-Filled</span>
