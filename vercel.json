@@ -35,6 +35,18 @@
       "dest": "api/index.py"
     },
     {
+      "src": "/upload-report-pdf",
+      "dest": "api/index.py"
+    },
+    {
+      "src": "/sample-lab-pdf",
+      "dest": "api/index.py"
+    },
+    {
+      "src": "/powerbi-dataset",
+      "dest": "api/index.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "frontend/$1"
     }

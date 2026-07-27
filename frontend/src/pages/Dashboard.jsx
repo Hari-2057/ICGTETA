@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { api, FALLBACK_PRESETS } from '../services/api';
-import { PatientPresets } from '../components/PatientPresets';
+import React, { useState } from 'react';
+import { api } from '../services/api';
+import { PdfReportUploader } from '../components/PdfReportUploader';
 import { LabInputForm } from '../components/LabInputForm';
 import { RiskGauge } from '../components/RiskGauge';
 import { ConfidenceMeter } from '../components/ConfidenceMeter';
 import { SeverityCard } from '../components/SeverityCard';
 import { ShapChart } from '../components/ShapChart';
 import { RecommendationsCard } from '../components/RecommendationsCard';
-import { Activity, Stethoscope, Sparkles, AlertCircle } from 'lucide-react';
+import { Stethoscope, Sparkles } from 'lucide-react';
 
 const EMPTY_LAB_DATA = {
   hba1c: '', fasting_glucose: '', random_glucose: '',
@@ -20,52 +20,36 @@ const EMPTY_LAB_DATA = {
   sodium: '', potassium: '', chloride: ''
 };
 
-export const Dashboard = ({ onOpenMetricsModal }) => {
-  const [presets, setPresets] = useState(FALLBACK_PRESETS);
-  const [activePresetId, setActivePresetId] = useState(null);
+export const Dashboard = () => {
   const [labData, setLabData] = useState(EMPTY_LAB_DATA);
   const [prediction, setPrediction] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [validationError, setValidationError] = useState('');
 
-  useEffect(() => {
-    fetchPresets();
-  }, []);
-
-  const fetchPresets = async () => {
-    try {
-      const data = await api.getPresets();
-      if (Array.isArray(data) && data.length > 0) {
-        setPresets(data);
-      }
-    } catch {
-      setPresets(FALLBACK_PRESETS);
+  const handleBiomarkersExtracted = (extractedBiomarkers) => {
+    const updatedData = { ...labData, ...extractedBiomarkers };
+    setLabData(updatedData);
+    setValidationError('');
+    // Auto-predict if mandatory biomarkers are present
+    if (updatedData.hba1c && updatedData.fasting_glucose && updatedData.random_glucose) {
+      handlePredict(updatedData);
     }
   };
 
-  const handleSelectPreset = (preset) => {
-    setActivePresetId(preset.id);
-    setValidationError('');
-    setLabData(preset.data);
-    handlePredict(preset.data);
-  };
-
   const handlePredict = async (dataToPredict = labData) => {
-    // Validate mandatory biomarkers
     const hba1c = Number(dataToPredict.hba1c);
     const fpg = Number(dataToPredict.fasting_glucose);
     const rpg = Number(dataToPredict.random_glucose);
 
     if (!dataToPredict.hba1c || !dataToPredict.fasting_glucose || !dataToPredict.random_glucose || isNaN(hba1c) || isNaN(fpg) || isNaN(rpg)) {
-      setValidationError('Please fill in mandatory biomarkers: HbA1c (%), Fasting Glucose (mg/dL), and Random Glucose (mg/dL).');
+      setValidationError('Please enter mandatory laboratory biomarkers: HbA1c (%), Fasting Glucose (mg/dL), and Random Glucose (mg/dL).');
       return;
     }
 
     setValidationError('');
     setIsLoading(true);
 
-    // Prepare complete payload with standard fallback defaults for blank optional fields
     const filledPayload = {
       hba1c: hba1c,
       fasting_glucose: fpg,
@@ -123,7 +107,6 @@ export const Dashboard = ({ onOpenMetricsModal }) => {
   };
 
   const handleReset = () => {
-    setActivePresetId(null);
     setValidationError('');
     setLabData(EMPTY_LAB_DATA);
     setPrediction(null);
@@ -143,16 +126,12 @@ export const Dashboard = ({ onOpenMetricsModal }) => {
 
   return (
     <div className="space-y-6">
-      {/* Patient Preset Profiles */}
-      <PatientPresets
-        presets={presets}
-        activePresetId={activePresetId}
-        onSelectPreset={handleSelectPreset}
-      />
+      {/* PDF Lab Report Automated Importer (Replaces 1-Click Presets) */}
+      <PdfReportUploader onBiomarkersExtracted={handleBiomarkersExtracted} />
 
       {/* Main Workspace Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column: Input Form (Empty by Default) */}
+        {/* Left Column: Form Fields */}
         <div className="lg:col-span-7">
           <LabInputForm
             labData={labData}
@@ -164,7 +143,7 @@ export const Dashboard = ({ onOpenMetricsModal }) => {
           />
         </div>
 
-        {/* Right Column: Prediction Results or Welcome Empty State */}
+        {/* Right Column: Prediction Results or Welcome Initial State */}
         <div className="lg:col-span-5 space-y-6">
           {prediction ? (
             <>
@@ -182,7 +161,7 @@ export const Dashboard = ({ onOpenMetricsModal }) => {
                   Ready for Patient Risk Assessment
                 </h3>
                 <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-                  Enter mandatory laboratory biomarkers (<span className="text-cyan-400 font-semibold">HbA1c, Fasting Glucose, Random Glucose</span>) in the form or choose a Sample Patient Preset above to calculate CDSS risk, conformal confidence, and SHAP attributions.
+                  Upload a patient blood test PDF report above or enter mandatory laboratory biomarkers (<span className="text-cyan-400 font-semibold">HbA1c, Fasting Glucose, Random Glucose</span>) to run CDSS risk analysis.
                 </p>
               </div>
               <div className="pt-2 flex items-center space-x-2 text-[11px] font-semibold text-cyan-400 bg-cyan-950/40 px-3 py-1.5 rounded-full border border-cyan-800/40">
