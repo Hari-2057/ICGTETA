@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
+import { generateClientPdfReport } from '../utils/pdfGenerator';
 import { PdfReportUploader } from '../components/PdfReportUploader';
 import { LabInputForm } from '../components/LabInputForm';
 import { RiskGauge } from '../components/RiskGauge';
@@ -31,7 +32,6 @@ export const Dashboard = () => {
     const updatedData = { ...labData, ...extractedBiomarkers };
     setLabData(updatedData);
     setValidationError('');
-    // Auto-predict if mandatory biomarkers are present
     if (updatedData.hba1c && updatedData.fasting_glucose && updatedData.random_glucose) {
       handlePredict(updatedData);
     }
@@ -116,9 +116,13 @@ export const Dashboard = () => {
     if (!prediction) return;
     setIsDownloading(true);
     try {
-      await api.generateReport(labData);
-    } catch (err) {
-      console.error('PDF report error:', err);
+      // 100% Reliable Client & Server Dual PDF Download Trigger
+      const success = await api.generateReport(labData);
+      if (!success) {
+        generateClientPdfReport(prediction, labData);
+      }
+    } catch {
+      generateClientPdfReport(prediction, labData);
     } finally {
       setIsDownloading(false);
     }
@@ -126,7 +130,7 @@ export const Dashboard = () => {
 
   return (
     <div className="space-y-6">
-      {/* PDF Lab Report Automated Importer (Replaces 1-Click Presets) */}
+      {/* PDF Lab Report Automated Importer */}
       <PdfReportUploader onBiomarkersExtracted={handleBiomarkersExtracted} />
 
       {/* Main Workspace Layout */}

@@ -67,11 +67,13 @@ export const api = {
     try {
       const res = await axios.get(`${API_BASE_URL}/powerbi-dataset`, {
         responseType: 'blob',
-        timeout: 10000
+        timeout: 6000
       });
       triggerBlobDownload(res.data, 'model_performance_powerbi_dataset.csv', 'text/csv');
+      return true;
     } catch (err) {
       console.error('Power BI download error:', err);
+      return false;
     }
   },
 
@@ -88,11 +90,13 @@ export const api = {
     try {
       const res = await axios.post(`${API_BASE_URL}/generate-report`, labData, {
         responseType: 'blob',
-        timeout: 10000
+        timeout: 4000
       });
       triggerBlobDownload(res.data, `Clinical_CDSS_Diabetes_Report_${Date.now()}.pdf`, 'application/pdf');
+      return true;
     } catch (err) {
-      console.error('PDF report download error:', err);
+      console.warn('Backend PDF stream timeout. Triggering instant client PDF generator:', err);
+      return false;
     }
   }
 };
