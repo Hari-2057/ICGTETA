@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { 
   Stethoscope, Activity, ShieldCheck, Zap, Layers, FileUp, 
   BarChart2, Cloud, ArrowRight, CheckCircle2, ChevronDown, 
-  Sparkles, HeartPulse, Dna, Atom
+  Sparkles, HeartPulse, Dna, Atom, UserCheck
 } from 'lucide-react';
+import { AntiGravityCard } from '../components/AntiGravityCard';
+import { MagneticButton } from '../components/MagneticButton';
 
 export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -98,7 +100,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   return (
     <div className="space-y-24 py-4 relative z-10">
       
-      {/* 1. HERO SECTION WITH SELF-DRAWING GLUCOSE WAVEFORM & FLOATING MOLECULES */}
+      {/* 1. HERO SECTION WITH SELF-DRAWING GLUCOSE WAVEFORM, HOLOGRAPHIC SILHOUETTE & FLOATING MOLECULES */}
       <section className="relative overflow-hidden pt-8 pb-16">
         
         {/* Animated Parallax Gradient Glow Background */}
@@ -130,7 +132,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           {/* Clinical Badge */}
           <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 via-cyan-500/10 to-blue-500/10 border border-teal-300/40 dark:border-teal-700/40 text-teal-800 dark:text-teal-300 text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
             <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 animate-spin-slow" />
-            <span>Precision Care Elevated • Healthcare AI</span>
+            <span>Anti-Gravity AI Platform • Precision Care Elevated</span>
             <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-ping"></span>
           </div>
 
@@ -138,6 +140,18 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15] animate-fade-rise stagger-1">
             Precision Diabetes Risk Assessment with <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 dark:from-teal-400 dark:via-cyan-400 dark:to-blue-400">Calibrated Conformal AI</span>
           </h1>
+
+          {/* HOLOGRAPHIC HUMAN SILHOUETTE & ROTATING PLATFORM */}
+          <div className="relative my-8 h-32 flex items-center justify-center">
+            {/* Rotating Hologram Platform Ring Base */}
+            <div className="absolute w-48 h-48 rounded-full border-2 border-dashed border-teal-500/40 dark:border-teal-400/40 animate-platform-rotate pointer-events-none"></div>
+            <div className="absolute w-36 h-36 rounded-full border border-cyan-500/30 dark:border-cyan-400/30 animate-spin-slow pointer-events-none"></div>
+
+            {/* Suspended Breathing Hologram Avatar */}
+            <div className="relative p-4 rounded-3xl bg-gradient-to-br from-teal-500/20 via-cyan-500/20 to-blue-500/20 border border-teal-300/40 dark:border-teal-700/40 backdrop-blur-xl shadow-2xl animate-hologram-breath z-10 flex items-center justify-center">
+              <UserCheck className="w-10 h-10 text-teal-600 dark:text-teal-300 animate-pulse" />
+            </div>
+          </div>
 
           {/* Self-Drawing Animated Glucose Waveform SVG */}
           <div className="my-6 max-w-2xl mx-auto h-20 relative flex items-center justify-center">
@@ -166,129 +180,139 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
             Empower physicians with mathematically guaranteed confidence bounds (95% statistical confidence), SHAP game-theoretic explainability, and automated blood lab report PDF parsing.
           </p>
 
-          {/* CTA Buttons */}
+          {/* CTA Magnetic Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-fade-rise stagger-3">
-            <button
+            <MagneticButton
               onClick={onLaunchWorkspace}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl liquid-btn-primary font-extrabold text-sm flex items-center justify-center space-x-2 group"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl liquid-btn-primary font-extrabold text-sm flex items-center justify-center space-x-2 group shadow-xl"
             >
               <Stethoscope className="w-5 h-5 text-white icon-nudge" />
               <span>Launch Clinical Workspace</span>
               <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition" />
-            </button>
+            </MagneticButton>
 
-            <button
+            <MagneticButton
               onClick={onGoToPerformance}
               className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-sm border border-slate-200 dark:border-slate-800 shadow-md transition flex items-center justify-center space-x-2 group"
             >
               <BarChart2 className="w-5 h-5 text-amber-600 dark:text-amber-400 icon-nudge" />
               <span>Explore Power BI Analytics</span>
-            </button>
+            </MagneticButton>
           </div>
 
-          {/* Key Stat Badges */}
+          {/* Key Stat Anti-Gravity Badges */}
           <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto animate-fade-rise stagger-4">
-            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm hover:shadow-md transition">
-              <span className="text-2xl font-extrabold text-teal-600 dark:text-teal-400 font-mono">99.6%</span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Tuned Accuracy</span>
-            </div>
-            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm hover:shadow-md transition">
-              <span className="text-2xl font-extrabold text-cyan-600 dark:text-cyan-400 font-mono">&lt;50ms</span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Inference Latency</span>
-            </div>
-            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm hover:shadow-md transition">
-              <span className="text-2xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">3,500+</span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Clinical Records</span>
-            </div>
-            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm hover:shadow-md transition">
-              <span className="text-2xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">ADA/WHO</span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Aligned Protocols</span>
-            </div>
+            <AntiGravityCard floatDelay="0s" depth={0.6}>
+              <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm">
+                <span className="text-2xl font-extrabold text-teal-600 dark:text-teal-400 font-mono">99.6%</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Tuned Accuracy</span>
+              </div>
+            </AntiGravityCard>
+            <AntiGravityCard floatDelay="0.4s" depth={0.6}>
+              <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm">
+                <span className="text-2xl font-extrabold text-cyan-600 dark:text-cyan-400 font-mono">&lt;50ms</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Inference Latency</span>
+              </div>
+            </AntiGravityCard>
+            <AntiGravityCard floatDelay="0.8s" depth={0.6}>
+              <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm">
+                <span className="text-2xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">3,500+</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Clinical Records</span>
+              </div>
+            </AntiGravityCard>
+            <AntiGravityCard floatDelay="1.2s" depth={0.6}>
+              <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm">
+                <span className="text-2xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">ADA/WHO</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Aligned Protocols</span>
+              </div>
+            </AntiGravityCard>
           </div>
 
         </div>
       </section>
 
-      {/* 2. INTERACTIVE CLINICAL DASHBOARD PREVIEW */}
+      {/* 2. INTERACTIVE CLINICAL DASHBOARD PREVIEW WITH 3D TILT */}
       <section className="max-w-6xl mx-auto px-4">
         <div className="text-center space-y-3 mb-8">
           <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-            Interactive Dashboard Preview
+            Interactive Anti-Gravity Preview
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
             Designed for Modern Physicians & Healthcare Systems
           </h2>
         </div>
 
-        <div className="relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-2xl overflow-hidden glass-panel">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-teal-400/10 via-cyan-400/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+        <AntiGravityCard depth={0.8} floatDelay="0.2s">
+          <div className="relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-2xl overflow-hidden glass-panel">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-teal-400/10 via-cyan-400/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
-          {/* Mock Dashboard Card */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3">
-                <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
-                  <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
-                    <HeartPulse className="w-4 h-4 text-teal-600 dark:text-teal-400 animate-pulse" />
-                    <span>Patient Lab Findings (HbA1c 6.4%, Fasting Glucose 118 mg/dL)</span>
-                  </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
-                    Prediabetes Risk
-                  </span>
+            {/* Mock Dashboard Card */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
+              <div className="lg:col-span-7 space-y-4">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
+                    <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
+                      <HeartPulse className="w-4 h-4 text-teal-600 dark:text-teal-400 animate-pulse" />
+                      <span>Patient Lab Findings (HbA1c 6.4%, Fasting Glucose 118 mg/dL)</span>
+                    </span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+                      Prediabetes Risk
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                      <span className="text-[10px] text-slate-500 block">HbA1c Level</span>
+                      <span className="font-bold text-teal-700 dark:text-teal-400 font-mono">6.4 %</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-slate-500 block">Fasting Glucose</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-200 font-mono">118 mg/dL</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-slate-500 block">TyG Index</span>
+                      <span className="font-bold text-purple-600 dark:text-purple-400 font-mono">8.92</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="grid grid-cols-3 gap-2 text-xs">
-                  <div>
-                    <span className="text-[10px] text-slate-500 block">HbA1c Level</span>
-                    <span className="font-bold text-teal-700 dark:text-teal-400 font-mono">6.4 %</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-500 block">Fasting Glucose</span>
-                    <span className="font-bold text-slate-800 dark:text-slate-200 font-mono">118 mg/dL</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] text-slate-500 block">TyG Index</span>
-                    <span className="font-bold text-purple-600 dark:text-purple-400 font-mono">8.92</span>
+
+                {/* Mock SHAP Attributions */}
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
+                  <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">SHAP Risk Drivers (+ Attributions)</span>
+                  <div className="space-y-2 text-xs">
+                    <div>
+                      <div className="flex justify-between font-semibold mb-1">
+                        <span>HbA1c (+0.80)</span>
+                        <span className="text-rose-600 dark:text-rose-400 font-mono">+0.80</span>
+                      </div>
+                      <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-rose-500 to-pink-500 h-full w-[80%] rounded-full transition-all duration-700"></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Mock SHAP Attributions */}
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">SHAP Risk Drivers (+ Attributions)</span>
-                <div className="space-y-2 text-xs">
-                  <div>
-                    <div className="flex justify-between font-semibold mb-1">
-                      <span>HbA1c (+0.80)</span>
-                      <span className="text-rose-600 dark:text-rose-400 font-mono">+0.80</span>
-                    </div>
-                    <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
-                      <div className="bg-gradient-to-r from-rose-500 to-pink-500 h-full w-[80%] rounded-full transition-all duration-700"></div>
-                    </div>
-                  </div>
+              <div className="lg:col-span-5 space-y-4">
+                <div className="p-5 rounded-2xl bg-gradient-to-br from-teal-600 via-cyan-600 to-blue-600 text-white shadow-lg space-y-3 relative overflow-hidden">
+                  <span className="text-xs font-bold uppercase tracking-wider block opacity-90">Calibrated Conformal Confidence</span>
+                  <div className="text-3xl font-extrabold font-mono">88.5%</div>
+                  <p className="text-xs leading-relaxed opacity-95">
+                    Conformal Prediction Set: [Prediabetes]. Model confidence is high and mathematically calibrated.
+                  </p>
+                  <button
+                    onClick={onLaunchWorkspace}
+                    className="w-full py-2.5 rounded-xl bg-white text-teal-900 font-extrabold text-xs hover:bg-slate-100 transition shadow"
+                  >
+                    Test Patient Biomarkers Now →
+                  </button>
                 </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 space-y-4">
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-teal-600 via-cyan-600 to-blue-600 text-white shadow-lg space-y-3 relative overflow-hidden">
-                <span className="text-xs font-bold uppercase tracking-wider block opacity-90">Calibrated Conformal Confidence</span>
-                <div className="text-3xl font-extrabold font-mono">88.5%</div>
-                <p className="text-xs leading-relaxed opacity-95">
-                  Conformal Prediction Set: [Prediabetes]. Model confidence is high and mathematically calibrated.
-                </p>
-                <button
-                  onClick={onLaunchWorkspace}
-                  className="w-full py-2.5 rounded-xl bg-white text-teal-900 font-extrabold text-xs hover:bg-slate-100 transition shadow"
-                >
-                  Test Patient Biomarkers Now →
-                </button>
               </div>
             </div>
           </div>
-        </div>
+        </AntiGravityCard>
       </section>
 
-      {/* 3. CARD-BASED FEATURES SECTION */}
+      {/* 3. CARD-BASED FEATURES SECTION WITH ZERO-GRAVITY CARDS */}
       <section className="max-w-7xl mx-auto px-4 space-y-12">
         <div className="text-center space-y-3">
           <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
@@ -301,16 +325,17 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((item, idx) => (
-            <div
-              key={idx}
-              className={`p-6 rounded-2xl glass-card space-y-3 group animate-fade-rise stagger-${(idx % 6) + 1}`}
-            >
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/80 w-fit border border-slate-100 dark:border-slate-700">
-                {item.icon}
+            <AntiGravityCard key={idx} floatDelay={`${idx * 0.2}s`} depth={0.7}>
+              <div className="p-6 rounded-2xl glass-card space-y-3 group h-full flex flex-col justify-between">
+                <div>
+                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/80 w-fit border border-slate-100 dark:border-slate-700 mb-3">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-base font-extrabold text-slate-900 dark:text-white">{item.title}</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium mt-1">{item.description}</p>
+                </div>
               </div>
-              <h3 className="text-base font-extrabold text-slate-900 dark:text-white">{item.title}</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">{item.description}</p>
-            </div>
+            </AntiGravityCard>
           ))}
         </div>
       </section>
@@ -328,13 +353,15 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {processSteps.map((step, idx) => (
-            <div key={idx} className="p-6 rounded-2xl glass-card space-y-3 relative">
-              <span className="text-4xl font-extrabold text-teal-600/20 dark:text-teal-400/20 font-mono block">
-                {step.num}
-              </span>
-              <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">{step.title}</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">{step.desc}</p>
-            </div>
+            <AntiGravityCard key={idx} floatDelay={`${idx * 0.3}s`} depth={0.6}>
+              <div className="p-6 rounded-2xl glass-card space-y-3 relative h-full">
+                <span className="text-4xl font-extrabold text-teal-600/20 dark:text-teal-400/20 font-mono block">
+                  {step.num}
+                </span>
+                <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">{step.title}</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">{step.desc}</p>
+              </div>
+            </AntiGravityCard>
           ))}
         </div>
       </section>
@@ -375,80 +402,82 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
       {/* 6. CONTACT FORM SECTION */}
       <section className="max-w-3xl mx-auto px-4">
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl space-y-6 glass-panel">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
-              Clinical Inquiry & Institutional Access
-            </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-              Connect with our medical AI team for hospital deployments and research collaboration.
-            </p>
-          </div>
-
-          {contactSubmitted && (
-            <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs font-semibold flex items-center space-x-2">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-              <span>Thank you for your inquiry! Our clinical AI team will reach out within 24 hours.</span>
+        <AntiGravityCard floatDelay="0.2s" depth={0.5}>
+          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl space-y-6 glass-panel">
+            <div className="text-center space-y-2">
+              <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+                Clinical Inquiry & Institutional Access
+              </h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                Connect with our medical AI team for hospital deployments and research collaboration.
+              </p>
             </div>
-          )}
 
-          <form onSubmit={handleContactSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {contactSubmitted && (
+              <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs font-semibold flex items-center space-x-2">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                <span>Thank you for your inquiry! Our clinical AI team will reach out within 24 hours.</span>
+              </div>
+            )}
+
+            <form onSubmit={handleContactSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Your Full Name</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Dr. Jane Doe"
+                    value={contactForm.name}
+                    onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                    className="w-full px-4 py-2.5 liquid-input rounded-xl text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Professional Email</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="jane.doe@hospital.org"
+                    value={contactForm.email}
+                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                    className="w-full px-4 py-2.5 liquid-input rounded-xl text-xs"
+                  />
+                </div>
+              </div>
+
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Your Full Name</label>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Healthcare Institution</label>
                 <input
                   type="text"
-                  required
-                  placeholder="Dr. Jane Doe"
-                  value={contactForm.name}
-                  onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                  placeholder="St. Jude Health System"
+                  value={contactForm.institution}
+                  onChange={(e) => setContactForm({ ...contactForm, institution: e.target.value })}
                   className="w-full px-4 py-2.5 liquid-input rounded-xl text-xs"
                 />
               </div>
+
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Professional Email</label>
-                <input
-                  type="email"
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Message / Inquiry</label>
+                <textarea
+                  rows="4"
                   required
-                  placeholder="jane.doe@hospital.org"
-                  value={contactForm.email}
-                  onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                  placeholder="Describe your institutional requirements..."
+                  value={contactForm.message}
+                  onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                   className="w-full px-4 py-2.5 liquid-input rounded-xl text-xs"
-                />
+                ></textarea>
               </div>
-            </div>
 
-            <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Healthcare Institution</label>
-              <input
-                type="text"
-                placeholder="St. Jude Health System"
-                value={contactForm.institution}
-                onChange={(e) => setContactForm({ ...contactForm, institution: e.target.value })}
-                className="w-full px-4 py-2.5 liquid-input rounded-xl text-xs"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Message / Inquiry</label>
-              <textarea
-                rows="4"
-                required
-                placeholder="Describe your institutional requirements..."
-                value={contactForm.message}
-                onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                className="w-full px-4 py-2.5 liquid-input rounded-xl text-xs"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full py-3.5 px-6 rounded-xl liquid-btn-primary font-extrabold text-xs uppercase tracking-wider transition"
-            >
-              Submit Clinical Inquiry
-            </button>
-          </form>
-        </div>
+              <MagneticButton
+                type="submit"
+                className="w-full py-3.5 px-6 rounded-xl liquid-btn-primary font-extrabold text-xs uppercase tracking-wider shadow-lg transition"
+              >
+                Submit Clinical Inquiry
+              </MagneticButton>
+            </form>
+          </div>
+        </AntiGravityCard>
       </section>
 
     </div>
