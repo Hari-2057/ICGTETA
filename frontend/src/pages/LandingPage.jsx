@@ -6,7 +6,6 @@ import {
 } from 'lucide-react';
 import { AntiGravityCard } from '../components/AntiGravityCard';
 import { MagneticButton } from '../components/MagneticButton';
-import { HologramHuman } from '../components/HologramHuman';
 
 export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -93,14 +92,14 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
     { num: "2", title: "AI Parses & Extracts", desc: "Auto extract biomarker values" },
     { num: "3", title: "Risk Assessment", desc: "AI calculates calibrated risk score" },
     { num: "4", title: "Confidence Estimation", desc: "95% confidence bounds calculated" },
-    { num: "5", title: "Clinical Insights", desc: "Actionable medical recommendations" }
+    { num: "5", title: "Clinical Insights", desc: "Actionable recommendations" }
   ];
 
   return (
     <div className="space-y-20 py-4 relative z-10">
       
-      {/* HERO SECTION MATCHING REFERENCE COMPOSITION */}
-      <section className="relative overflow-hidden pt-4 pb-12">
+      {/* HERO SECTION WITH BALANCED 2-COLUMN LAYOUT */}
+      <section className="relative overflow-hidden pt-6 pb-12">
         
         {/* Apple Vision Pro Ambient Light Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[520px] bg-gradient-to-b from-cyan-200/40 via-sky-100/30 to-transparent dark:from-cyan-950/25 dark:via-sky-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
@@ -108,7 +107,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10 px-4 max-w-7xl mx-auto">
           
           {/* LEFT COLUMN: HERO TEXT & CTAS */}
-          <div className="lg:col-span-5 space-y-6 text-left">
+          <div className="lg:col-span-6 space-y-6 text-left">
             
             {/* Feature Badge */}
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-100/70 dark:bg-cyan-950/70 border border-cyan-300/60 dark:border-cyan-700/60 text-cyan-800 dark:text-cyan-300 text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
@@ -131,7 +130,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-2 animate-fade-rise stagger-3">
               <MagneticButton
                 onClick={onLaunchWorkspace}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl liquid-btn-primary font-extrabold text-xs flex items-center justify-center space-x-2 shadow-lg shadow-cyan-600/25"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-2xl liquid-btn-primary font-extrabold text-xs flex items-center justify-center space-x-2 shadow-lg shadow-cyan-600/25"
               >
                 <Stethoscope className="w-4 h-4 text-white icon-nudge" />
                 <span>Launch Clinical Workspace</span>
@@ -140,7 +139,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
               <MagneticButton
                 onClick={onGoToPerformance}
-                className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs border border-slate-200 dark:border-slate-800 shadow-sm transition flex items-center justify-center space-x-2"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs border border-slate-200 dark:border-slate-800 shadow-sm transition flex items-center justify-center space-x-2"
               >
                 <BarChart2 className="w-4 h-4 text-amber-600 dark:text-amber-400 icon-nudge" />
                 <span>Explore Power BI Analytics</span>
@@ -149,10 +148,10 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
           </div>
 
-          {/* MIDDLE COLUMN: CLINICAL DASHBOARD PREVIEW CARD (Matching Reference Image) */}
-          <div className="lg:col-span-4">
+          {/* RIGHT COLUMN: CLINICAL DASHBOARD PREVIEW CARD */}
+          <div className="lg:col-span-6">
             <AntiGravityCard depth={0.6} floatDelay="0.2s">
-              <div className="bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-5 shadow-2xl glass-panel space-y-4">
+              <div className="bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-6 sm:p-7 shadow-2xl glass-panel space-y-4">
                 
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
@@ -170,65 +169,71 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
                 </div>
 
                 {/* Score & Donut Charts Grid */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Diabetes Risk Score */}
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-1.5">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-2">
                     <span className="text-[10px] font-bold text-slate-500 block">Diabetes Risk Score</span>
-                    <div className="flex items-baseline space-x-1.5">
-                      <span className="text-2xl font-extrabold font-mono text-slate-900 dark:text-white">0.28</span>
-                      <span className="px-2 py-0.5 rounded text-[9px] font-extrabold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                    <div className="flex items-baseline space-x-2">
+                      <span className="text-3xl font-extrabold font-mono text-slate-900 dark:text-white">0.28</span>
+                      <span className="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
                         Low Risk
                       </span>
                     </div>
-                    <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
                       <div className="bg-emerald-500 h-full w-[28%] rounded-full"></div>
                     </div>
-                    <div className="flex justify-between text-[9px] font-bold text-slate-400 pt-1">
+                    <div className="flex justify-between text-[10px] font-bold text-slate-400 pt-1">
                       <span>95% Confidence Interval</span>
                       <span className="font-mono">0.18 – 0.38</span>
                     </div>
                   </div>
 
                   {/* Risk Distribution Donut */}
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-1.5">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-2">
                     <span className="text-[10px] font-bold text-slate-500 block">Risk Distribution</span>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-10 h-10 rounded-full border-4 border-emerald-500 border-t-amber-500 border-r-rose-500 animate-spin-slow"></div>
-                      <div className="text-[9px] space-y-0.5 font-bold">
-                        <div className="flex items-center space-x-1"><span className="w-2 h-2 rounded-full bg-emerald-500"></span><span>Low Risk 65%</span></div>
-                        <div className="flex items-center space-x-1"><span className="w-2 h-2 rounded-full bg-amber-500"></span><span>Med Risk 25%</span></div>
-                        <div className="flex items-center space-x-1"><span className="w-2 h-2 rounded-full bg-rose-500"></span><span>High Risk 10%</span></div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-12 h-12 rounded-full border-4 border-emerald-500 border-t-amber-500 border-r-rose-500 animate-spin-slow"></div>
+                      <div className="text-[10px] space-y-1 font-bold">
+                        <div className="flex items-center space-x-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500"></span><span>Low Risk 65%</span></div>
+                        <div className="flex items-center space-x-1.5"><span className="w-2 h-2 rounded-full bg-amber-500"></span><span>Med Risk 25%</span></div>
+                        <div className="flex items-center space-x-1.5"><span className="w-2 h-2 rounded-full bg-rose-500"></span><span>High Risk 10%</span></div>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Top Contributing Factors & Recent Patients */}
-                <div className="grid grid-cols-2 gap-3 text-[10px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-1">
                   {/* Top Contributing Factors */}
-                  <div className="space-y-1.5">
+                  <div className="space-y-2">
                     <span className="font-bold text-slate-700 dark:text-slate-300 block">Top Contributing Factors</span>
-                    <div className="space-y-1">
-                      <div className="flex justify-between"><span>Glucose</span><span className="font-mono font-bold">0.42</span></div>
-                      <div className="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full"><div className="bg-cyan-500 h-full w-[84%]"></div></div>
-                      <div className="flex justify-between"><span>BMI</span><span className="font-mono font-bold">0.21</span></div>
-                      <div className="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full"><div className="bg-blue-500 h-full w-[42%]"></div></div>
-                      <div className="flex justify-between"><span>Age</span><span className="font-mono font-bold">0.15</span></div>
-                      <div className="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full"><div className="bg-purple-500 h-full w-[30%]"></div></div>
+                    <div className="space-y-1.5">
+                      <div>
+                        <div className="flex justify-between font-semibold mb-0.5"><span>Glucose</span><span className="font-mono">0.42</span></div>
+                        <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full"><div className="bg-cyan-500 h-full w-[84%] rounded-full"></div></div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between font-semibold mb-0.5"><span>BMI</span><span className="font-mono">0.21</span></div>
+                        <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full"><div className="bg-blue-500 h-full w-[42%] rounded-full"></div></div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between font-semibold mb-0.5"><span>Age</span><span className="font-mono">0.15</span></div>
+                        <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full"><div className="bg-purple-500 h-full w-[30%] rounded-full"></div></div>
+                      </div>
                     </div>
                   </div>
 
                   {/* Recent Patients Table */}
-                  <div className="space-y-1.5">
+                  <div className="space-y-2">
                     <span className="font-bold text-slate-700 dark:text-slate-300 block">Recent Patients</span>
-                    <div className="space-y-1 font-mono text-[9px]">
-                      <div className="flex justify-between items-center p-1 rounded bg-slate-100 dark:bg-slate-800">
+                    <div className="space-y-1.5 font-mono text-[10px]">
+                      <div className="flex justify-between items-center p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800">
                         <span>P00123</span><span className="text-emerald-600 font-bold">Low Risk</span><span className="text-slate-400">2m ago</span>
                       </div>
-                      <div className="flex justify-between items-center p-1 rounded bg-slate-100 dark:bg-slate-800">
+                      <div className="flex justify-between items-center p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800">
                         <span>P00124</span><span className="text-amber-600 font-bold">Med Risk</span><span className="text-slate-400">5m ago</span>
                       </div>
-                      <div className="flex justify-between items-center p-1 rounded bg-slate-100 dark:bg-slate-800">
+                      <div className="flex justify-between items-center p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800">
                         <span>P00125</span><span className="text-rose-600 font-bold">High Risk</span><span className="text-slate-400">8m ago</span>
                       </div>
                     </div>
@@ -239,14 +244,9 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
             </AntiGravityCard>
           </div>
 
-          {/* RIGHT COLUMN: LIVING 3D HOLOGRAPHIC HUMAN (Matching Reference Image) */}
-          <div className="lg:col-span-3">
-            <HologramHuman />
-          </div>
-
         </div>
 
-        {/* 5 HORIZONTALLY FLOATING PILL METRIC CARDS (Matching Reference Image) */}
+        {/* 5 HORIZONTALLY FLOATING PILL METRIC CARDS */}
         <div className="mt-8 max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-5 gap-3">
           {pillMetrics.map((item, idx) => (
             <AntiGravityCard key={idx} floatDelay={`${idx * 0.2}s`} depth={0.5}>
@@ -269,7 +269,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
       </section>
 
-      {/* ADVANCED FEATURES SECTION (Matching Reference Image Cards Grid) */}
+      {/* ADVANCED FEATURES SECTION */}
       <section className="max-w-7xl mx-auto px-4 space-y-8 pt-6">
         <div className="text-center space-y-2">
           <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
@@ -280,7 +280,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
           {features.map((item, idx) => (
             <AntiGravityCard key={idx} floatDelay={`${idx * 0.15}s`} depth={0.6}>
               <div className="p-4 rounded-2xl glass-card space-y-2.5 h-full flex flex-col justify-between">
@@ -297,7 +297,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
         </div>
       </section>
 
-      {/* HOW IT WORKS PROCESS WORKFLOW (Matching Reference Image) */}
+      {/* HOW IT WORKS PROCESS WORKFLOW */}
       <section className="max-w-6xl mx-auto px-4 space-y-6 pt-4">
         <div className="text-left border-b border-slate-200 dark:border-slate-800 pb-3">
           <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400">How It Works</h3>
@@ -435,7 +435,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   );
 };
 
-// Helper SVG icons for pill cards
+// Helper SVG icons
 function TargetIcon({ className }) {
   return <Sparkles className={className} />;
 }
