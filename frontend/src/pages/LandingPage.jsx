@@ -4,7 +4,6 @@ import {
   BarChart2, Cloud, ArrowRight, CheckCircle2, ChevronDown, 
   MessageSquare, Star, Sparkles, Cpu, Award, Globe, HeartPulse, User
 } from 'lucide-react';
-import { HeroConstellationBackground } from '../components/HeroConstellationBackground';
 
 export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -117,13 +116,10 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   return (
     <div className="space-y-20 py-4">
       
-      {/* 1. ANIMATED DATA CONSTELLATION HERO SECTION */}
-      <section className="relative overflow-hidden pt-8 pb-16 rounded-3xl bg-[var(--hero-bg)] border border-slate-200/60 dark:border-slate-800/60 shadow-xl transition-colors duration-300">
+      {/* 1. HERO SECTION */}
+      <section className="relative overflow-hidden pt-8 pb-16 rounded-3xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800/80 shadow-xl backdrop-blur-md transition-colors duration-300">
         
-        {/* Layer 1, 2, 3 Animated Data Constellation Canvas */}
-        <HeroConstellationBackground />
-
-        {/* Foreground Content (z-10 layer above constellation canvas) */}
+        {/* Foreground Content */}
         <div className="relative z-10 text-center max-w-4xl mx-auto space-y-6 px-4">
           
           {/* Framer HealthTech Badge */}
@@ -197,13 +193,13 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           </h2>
         </div>
 
-        <div className="relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-2xl overflow-hidden">
+        <div className="relative rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 p-6 sm:p-8 shadow-2xl backdrop-blur-md overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-cyan-400/10 via-teal-400/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
           {/* Mock Dashboard Card */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
             <div className="lg:col-span-7 space-y-4">
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3">
+              <div className="p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-3">
                 <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
                   <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
                     <HeartPulse className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
@@ -230,7 +226,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
               </div>
 
               {/* Mock SHAP Attributions */}
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
+              <div className="p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2">
                 <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">SHAP Risk Drivers (+ Attributions)</span>
                 <div className="space-y-2 text-xs">
                   <div>
@@ -280,7 +276,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           {features.map((item, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 space-y-3"
+              className="p-6 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md hover:shadow-xl hover:-translate-y-1 backdrop-blur-md transition duration-300 space-y-3"
             >
               <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/80 w-fit border border-slate-100 dark:border-slate-700">
                 {item.icon}
@@ -305,7 +301,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {processSteps.map((step, idx) => (
-            <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md space-y-3 relative">
+            <div key={idx} className="p-6 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md space-y-3 relative">
               <span className="text-4xl font-extrabold text-cyan-600/20 dark:text-cyan-400/20 font-mono block">
                 {step.num}
               </span>
@@ -329,7 +325,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((item, idx) => (
-            <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md space-y-4 flex flex-col justify-between">
+            <div key={idx} className="p-6 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md space-y-4 flex flex-col justify-between">
               <div className="flex items-center space-x-1 text-amber-400">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-amber-400" />
@@ -362,7 +358,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition"
+              className="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-sm backdrop-blur-md overflow-hidden transition"
             >
               <button
                 onClick={() => toggleFaq(idx)}
@@ -383,7 +379,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
       {/* 7. CONTACT FORM SECTION */}
       <section className="max-w-3xl mx-auto px-4">
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl space-y-6">
+        <div className="bg-white/90 dark:bg-slate-900/90 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 p-8 shadow-xl backdrop-blur-md space-y-6">
           <div className="text-center space-y-2">
             <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
               Clinical Inquiry & Institutional Access

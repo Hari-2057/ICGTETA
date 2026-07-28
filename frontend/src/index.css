@@ -12,26 +12,30 @@
 /* Constellation Hero Background Theme Variables - Light Mode */
 html.light, [data-theme="light"] {
   --hero-bg: #EFF3F8;
-  --star-color-1: #185FA5;
-  --star-color-2: #534AB7;
-  --constellation-line: #185FA5;
+  --star-color-teal: #0F6E56;
+  --star-color-blue: #2563EB;
+  --star-color-orange: #F97316;
+  --star-color-purple: #7C3AED;
+  --constellation-line: #0284c7;
   --comet-1: #0F6E56;
-  --comet-1-glow: rgba(15, 110, 86, 0.4);
-  --comet-2: #993556;
-  --comet-2-glow: rgba(153, 53, 86, 0.4);
-  --molecule-core: #534AB7;
-  --orbit-dot-1: #185FA5;
+  --comet-1-glow: rgba(15, 110, 86, 0.6);
+  --comet-2: #2563EB;
+  --comet-2-glow: rgba(37, 99, 235, 0.6);
+  --molecule-core: #0284c7;
+  --orbit-dot-1: #2563EB;
   --orbit-dot-2: #0F6E56;
-  --orbit-ring: #185FA5;
-  --star-peak-opacity: 0.7;
-  --comet-peak-opacity: 0.8;
+  --orbit-ring: #0284c7;
+  --star-peak-opacity: 1.0;
+  --comet-peak-opacity: 0.95;
 }
 
 /* Constellation Hero Background Theme Variables - Dark Mode */
 html.dark, [data-theme="dark"] {
   --hero-bg: #0B1220;
-  --star-color-1: #93C5FD;
-  --star-color-2: #A78BFA;
+  --star-color-teal: #5DCAA5;
+  --star-color-blue: #60A5FA;
+  --star-color-orange: #FDBA74;
+  --star-color-purple: #C084FC;
   --constellation-line: #93C5FD;
   --comet-1: #5DCAA5;
   --comet-1-glow: rgba(93, 202, 165, 0.7);
@@ -64,20 +68,20 @@ html.dark body {
 
 @keyframes starTwinkle {
   0% {
-    opacity: 0.2;
+    opacity: 0.35;
     transform: scale(0.9);
   }
   100% {
     opacity: var(--star-peak-opacity);
-    transform: scale(1.15);
+    transform: scale(1.2);
   }
 }
 
-/* Layer 2: Comet Streaks */
+/* Layer 2: Comet Streaks (Widened to 10px with stronger glow) */
 .comet-streak {
   position: absolute;
-  width: 7px;
-  height: 2px;
+  width: 10px;
+  height: 2.5px;
   border-radius: 2px;
   opacity: 0;
   pointer-events: none;
@@ -85,7 +89,7 @@ html.dark body {
 
 .comet-streak-1 {
   background: var(--comet-1);
-  box-shadow: 0 0 8px var(--comet-1-glow);
+  box-shadow: 0 0 10px var(--comet-1-glow);
   top: 15%;
   left: 5%;
   animation: cometPath1 8s linear infinite;
@@ -94,7 +98,7 @@ html.dark body {
 
 .comet-streak-2 {
   background: var(--comet-2);
-  box-shadow: 0 0 8px var(--comet-2-glow);
+  box-shadow: 0 0 10px var(--comet-2-glow);
   top: 30%;
   left: 35%;
   animation: cometPath2 7.5s linear infinite;
@@ -114,7 +118,7 @@ html.dark body {
   }
   100% {
     opacity: 0;
-    transform: translate(450px, 220px) rotate(25deg);
+    transform: translate(500px, 250px) rotate(25deg);
   }
 }
 
@@ -131,7 +135,7 @@ html.dark body {
   }
   100% {
     opacity: 0;
-    transform: translate(380px, 240px) rotate(32deg);
+    transform: translate(420px, 260px) rotate(32deg);
   }
 }
 
@@ -146,7 +150,7 @@ html.dark body {
     opacity: 0.8;
   }
   100% {
-    transform: scale(1.2);
+    transform: scale(1.25);
     opacity: 1;
   }
 }
