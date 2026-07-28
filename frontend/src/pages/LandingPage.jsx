@@ -24,7 +24,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   const faqs = [
     {
       q: "What makes Conformal Prediction different from standard AI models?",
-      a: "Standard AI models often output uncalibrated probabilities that lead to false overconfidence. Our system applies MAPIE Conformal Prediction bounds (α = 0.05) to output mathematically guaranteed confidence sets and flag uncertain cases for secondary medical review."
+      a: "Standard AI models often output uncalibrated probabilities that lead to false overconfidence. Our system applies MAPIE Conformal Prediction bounds (95% confidence level) to output mathematically guaranteed confidence sets and flag uncertain cases for secondary medical review."
     },
     {
       q: "How does the automated PDF blood lab report importer work?",
@@ -48,7 +48,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
     {
       icon: <ShieldCheck className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />,
       title: "Conformal Prediction Bounds",
-      description: "Mathematically calibrated confidence sets (α = 0.05) that flag borderline or high-uncertainty clinical cases."
+      description: "Mathematically calibrated confidence sets (95% confidence level) that flag borderline or high-uncertainty clinical cases."
     },
     {
       icon: <Layers className="w-6 h-6 text-blue-600 dark:text-blue-400" />,
@@ -134,9 +134,9 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
             Precision Diabetes Risk Assessment with <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 dark:from-cyan-400 dark:via-teal-400 dark:to-blue-400">Calibrated Conformal AI</span>
           </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle - Cleaned of raw LaTeX math strings */}
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
-            Empower physicians with mathematically guaranteed confidence bounds ($\alpha = 0.05$), SHAP game-theoretic explainability, and automated blood lab report PDF parsing.
+            Empower physicians with mathematically guaranteed confidence bounds (95% statistical confidence), SHAP game-theoretic explainability, and automated blood lab report PDF parsing.
           </p>
 
           {/* CTA Buttons */}
