@@ -23,18 +23,15 @@ export const HologramHuman = () => {
         </div>
       </div>
 
-      {/* 3. EXACT 3D HOLOGRAPHIC HUMAN & PEDESTAL STAGE FROM REFERENCE IMAGE 2 */}
+      {/* 3. EXACT 3D HOLOGRAPHIC HUMAN BODY & PEDESTAL STAGE FROM IMAGE 2 */}
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center animate-hologram-breath">
         
-        {/* Hologram Human Body Image */}
+        {/* Hologram Human Body Image Extracted directly from Reference Image 2 */}
         <div className="relative w-full h-[460px] flex items-center justify-center">
           <img
             src="/hologram_exact_reference.png"
             alt="Exact 3D Holographic Human Body from Reference Image 2"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_30px_rgba(6,182,212,0.7)]"
-            style={{
-              mixBlendMode: 'multiply'
-            }}
+            className="w-full h-full object-contain filter drop-shadow-[0_0_25px_rgba(6,182,212,0.6)]"
           />
 
           {/* BLUE HOLOGRAPHIC SCANNING LASER LINE (Head to toe loop) */}
