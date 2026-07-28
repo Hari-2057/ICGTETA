@@ -120,20 +120,30 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       <section className="relative overflow-hidden pt-8 pb-16">
         
         {/* Animated Parallax Gradient Glow Background */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-gradient-to-b from-teal-400/15 via-cyan-400/10 to-transparent dark:from-teal-900/25 dark:via-cyan-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-gradient-to-b from-teal-400/15 via-cyan-400/10 to-transparent dark:from-teal-900/25 dark:via-cyan-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
-        {/* Floating 3D Micro-Badges */}
-        <div className="absolute top-10 left-[8%] hidden lg:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-teal-200/80 dark:border-teal-800/80 shadow-lg backdrop-blur-md animate-float-slow">
+        {/* FLOATING MICRO-BADGES - Positioned far to outer edges to NEVER collide with text */}
+        <div className="absolute top-6 left-2 xl:left-8 hidden lg:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-teal-200/90 dark:border-teal-800/90 shadow-xl backdrop-blur-md animate-float-slow z-20">
           <Atom className="w-5 h-5 text-teal-600 dark:text-teal-400 animate-spin-slow" />
-          <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200">HbA1c & Glucose Analysis</span>
+          <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 whitespace-nowrap">HbA1c & Glucose Analysis</span>
         </div>
 
-        <div className="absolute top-24 right-[10%] hidden lg:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-cyan-200/80 dark:border-cyan-800/80 shadow-lg backdrop-blur-md animate-float-reverse">
+        <div className="absolute top-6 right-2 xl:right-8 hidden lg:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-cyan-200/90 dark:border-cyan-800/90 shadow-xl backdrop-blur-md animate-float-reverse z-20">
           <Dna className="w-5 h-5 text-cyan-600 dark:text-cyan-400 animate-pulse" />
-          <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200">SHAP TreeExplainer</span>
+          <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 whitespace-nowrap">SHAP TreeExplainer</span>
         </div>
 
-        <div className="relative text-center max-w-4xl mx-auto space-y-6 px-4">
+        <div className="absolute bottom-4 left-2 xl:left-12 hidden xl:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-blue-200/90 dark:border-blue-800/90 shadow-xl backdrop-blur-md animate-float-reverse z-20">
+          <ShieldCheck className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 whitespace-nowrap">MAPIE Conformal Bounds</span>
+        </div>
+
+        <div className="absolute bottom-4 right-2 xl:right-12 hidden xl:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-amber-200/90 dark:border-amber-800/90 shadow-xl backdrop-blur-md animate-float-slow z-20">
+          <BarChart2 className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+          <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 whitespace-nowrap">Power BI Analytics</span>
+        </div>
+
+        <div className="relative text-center max-w-4xl mx-auto space-y-6 px-4 z-10">
           
           {/* Clinical Badge */}
           <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 via-cyan-500/10 to-blue-500/10 border border-teal-300/40 dark:border-teal-700/40 text-teal-800 dark:text-teal-300 text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
