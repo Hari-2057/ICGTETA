@@ -96,18 +96,18 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   ];
 
   return (
-    <div className="space-y-20 py-4 relative z-10">
+    <div className="space-y-10 py-2 relative z-10">
       
       {/* HERO SECTION WITH BALANCED 2-COLUMN LAYOUT */}
-      <section className="relative overflow-hidden pt-6 pb-12">
+      <section className="relative overflow-hidden pt-4 pb-4">
         
         {/* Apple Vision Pro Ambient Light Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[520px] bg-gradient-to-b from-cyan-200/40 via-sky-100/30 to-transparent dark:from-cyan-950/25 dark:via-sky-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[480px] bg-gradient-to-b from-cyan-200/40 via-sky-100/30 to-transparent dark:from-cyan-950/25 dark:via-sky-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10 px-4 max-w-7xl mx-auto">
           
           {/* LEFT COLUMN: HERO TEXT & CTAS */}
-          <div className="lg:col-span-6 space-y-6 text-left">
+          <div className="lg:col-span-6 space-y-5 text-left">
             
             {/* Feature Badge */}
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-100/70 dark:bg-cyan-950/70 border border-cyan-300/60 dark:border-cyan-700/60 text-cyan-800 dark:text-cyan-300 text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
@@ -127,7 +127,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2 animate-fade-rise stagger-3">
+            <div className="flex flex-col sm:flex-row items-center gap-3 pt-1 animate-fade-rise stagger-3">
               <MagneticButton
                 onClick={onLaunchWorkspace}
                 className="w-full sm:w-auto px-7 py-3.5 rounded-2xl liquid-btn-primary font-extrabold text-xs flex items-center justify-center space-x-2 shadow-lg shadow-cyan-600/25"
@@ -151,7 +151,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           {/* RIGHT COLUMN: CLINICAL DASHBOARD PREVIEW CARD */}
           <div className="lg:col-span-6">
             <AntiGravityCard depth={0.6} floatDelay="0.2s">
-              <div className="bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-6 sm:p-7 shadow-2xl glass-panel space-y-4">
+              <div className="bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-5 sm:p-6 shadow-2xl glass-panel space-y-4">
                 
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
@@ -247,9 +247,9 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
         </div>
 
         {/* 5 HORIZONTALLY FLOATING PILL METRIC CARDS */}
-        <div className="mt-8 max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-5 gap-3">
+        <div className="mt-4 max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-5 gap-3">
           {pillMetrics.map((item, idx) => (
-            <AntiGravityCard key={idx} floatDelay={`${idx * 0.2}s`} depth={0.5}>
+            <AntiGravityCard key={idx} floatDelay={`${idx * 0.15}s`} depth={0.5}>
               <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md flex items-center space-x-3">
                 <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700">
                   {item.icon}
@@ -270,8 +270,8 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       </section>
 
       {/* ADVANCED FEATURES SECTION */}
-      <section className="max-w-7xl mx-auto px-4 space-y-8 pt-6">
-        <div className="text-center space-y-2">
+      <section className="max-w-7xl mx-auto px-4 space-y-6 pt-0">
+        <div className="text-center space-y-1.5">
           <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
             Why Choose Our Platform
           </span>
@@ -298,14 +298,14 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       </section>
 
       {/* HOW IT WORKS PROCESS WORKFLOW */}
-      <section className="max-w-6xl mx-auto px-4 space-y-6 pt-4">
-        <div className="text-left border-b border-slate-200 dark:border-slate-800 pb-3">
+      <section className="max-w-6xl mx-auto px-4 space-y-4 pt-0">
+        <div className="text-left border-b border-slate-200 dark:border-slate-800 pb-2">
           <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400">How It Works</h3>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
           {processSteps.map((step, idx) => (
-            <AntiGravityCard key={idx} floatDelay={`${idx * 0.2}s`} depth={0.5}>
+            <AntiGravityCard key={idx} floatDelay={`${idx * 0.15}s`} depth={0.5}>
               <div className="p-3.5 rounded-2xl glass-card space-y-1.5 h-full relative">
                 <span className="text-xs font-extrabold text-cyan-600 font-mono block">
                   {step.num}. {step.title}
@@ -318,8 +318,8 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       </section>
 
       {/* FAQ ACCORDION SECTION */}
-      <section className="max-w-4xl mx-auto px-4 space-y-6 pt-6">
-        <div className="text-center space-y-2">
+      <section className="max-w-4xl mx-auto px-4 space-y-4 pt-2">
+        <div className="text-center space-y-1.5">
           <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
             Frequently Asked Questions
           </span>
@@ -354,8 +354,8 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       {/* CONTACT FORM SECTION */}
       <section className="max-w-3xl mx-auto px-4">
         <AntiGravityCard floatDelay="0.2s" depth={0.5}>
-          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl space-y-6 glass-panel">
-            <div className="text-center space-y-2">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-7 shadow-xl space-y-5 glass-panel">
+            <div className="text-center space-y-1.5">
               <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
                 Clinical Inquiry & Institutional Access
               </h2>
