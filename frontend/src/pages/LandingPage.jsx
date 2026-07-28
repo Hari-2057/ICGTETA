@@ -96,68 +96,68 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   ];
 
   return (
-    <div className="space-y-12 py-4 relative z-10">
+    <div className="space-y-8 sm:space-y-12 py-2 sm:py-4 relative z-10 w-full overflow-x-hidden">
       
       {/* HERO SECTION CENTERED LAYOUT */}
-      <section className="relative overflow-hidden pt-6 pb-6">
+      <section className="relative overflow-hidden pt-4 sm:pt-6 pb-4 sm:pb-6">
         
         {/* Apple Vision Pro Ambient Light Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[480px] bg-gradient-to-b from-cyan-200/40 via-sky-100/30 to-transparent dark:from-cyan-950/25 dark:via-sky-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="relative text-center max-w-4xl mx-auto space-y-6 px-4 z-10">
+        <div className="relative text-center max-w-4xl mx-auto space-y-4 sm:space-y-6 px-4 z-10">
           
           {/* Feature Badge */}
-          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-cyan-100/70 dark:bg-cyan-950/70 border border-cyan-300/60 dark:border-cyan-700/60 text-cyan-800 dark:text-cyan-300 text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
+          <div className="inline-flex items-center space-x-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-cyan-100/70 dark:bg-cyan-950/70 border border-cyan-300/60 dark:border-cyan-700/60 text-cyan-800 dark:text-cyan-300 text-[11px] sm:text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
             <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 animate-spin-slow" />
             <span>Next-Gen Framer HealthTech Platform</span>
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping"></span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15] animate-fade-rise stagger-1">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight animate-fade-rise stagger-1 px-2">
             Precision Diabetes Risk Assessment with <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 dark:from-cyan-400 dark:via-teal-400 dark:to-blue-400">Calibrated Conformal AI</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium animate-fade-rise stagger-2">
+          <p className="text-xs sm:text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium animate-fade-rise stagger-2 px-2">
             Empower physicians with mathematically guaranteed confidence bounds (95% statistical confidence), SHAP game-theoretic explainability, and automated blood lab report PDF parsing.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 animate-fade-rise stagger-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2 animate-fade-rise stagger-3 px-2">
             <MagneticButton
               onClick={onLaunchWorkspace}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl liquid-btn-primary font-extrabold text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-lg shadow-cyan-600/25"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl liquid-btn-primary font-extrabold text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-lg shadow-cyan-600/25"
             >
-              <Stethoscope className="w-5 h-5 text-white icon-nudge" />
+              <Stethoscope className="w-4 h-4 sm:w-5 sm:h-5 text-white icon-nudge" />
               <span>Launch Clinical Workspace</span>
               <ArrowRight className="w-4 h-4 ml-1" />
             </MagneticButton>
 
             <MagneticButton
               onClick={onGoToPerformance}
-              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs sm:text-sm border border-slate-200 dark:border-slate-800 shadow-sm transition flex items-center justify-center space-x-2"
+              className="w-full sm:w-auto px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs sm:text-sm border border-slate-200 dark:border-slate-800 shadow-sm transition flex items-center justify-center space-x-2"
             >
-              <BarChart2 className="w-5 h-5 text-amber-600 dark:text-amber-400 icon-nudge" />
+              <BarChart2 className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400 icon-nudge" />
               <span>Explore Power BI Analytics</span>
             </MagneticButton>
           </div>
 
         </div>
 
-        {/* 5 HORIZONTALLY FLOATING PILL METRIC CARDS */}
-        <div className="mt-10 max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-5 gap-3">
+        {/* 5 HORIZONTALLY FLOATING PILL METRIC CARDS (Responsive Grid for Mobile 1-col, Tablet 2-col, Desktop 5-col) */}
+        <div className="mt-8 sm:mt-10 max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {pillMetrics.map((item, idx) => (
             <AntiGravityCard key={idx} floatDelay={`${idx * 0.15}s`} depth={0.5}>
-              <div className="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md flex items-center space-x-3">
-                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700">
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md flex items-center space-x-3">
+                <div className="p-2 sm:p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700">
                   {item.icon}
                 </div>
                 <div>
-                  <span className="text-lg font-extrabold text-slate-900 dark:text-white font-mono block leading-tight">
+                  <span className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white font-mono block leading-tight">
                     {item.title}
                   </span>
-                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 block whitespace-nowrap">
+                  <span className="text-[11px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 block">
                     {item.desc}
                   </span>
                 </div>
@@ -169,26 +169,26 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       </section>
 
       {/* ADVANCED FEATURES SECTION */}
-      <section className="max-w-7xl mx-auto px-4 space-y-6 pt-2">
+      <section className="max-w-7xl mx-auto px-4 space-y-4 sm:space-y-6 pt-2">
         <div className="text-center space-y-1.5">
-          <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
+          <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
             Why Choose Our Platform
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+          <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
             Advanced Features for Better <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600">Clinical Decisions</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((item, idx) => (
             <AntiGravityCard key={idx} floatDelay={`${idx * 0.15}s`} depth={0.6}>
-              <div className="p-4 rounded-2xl glass-card space-y-2.5 h-full flex flex-col justify-between">
+              <div className="p-4 sm:p-5 rounded-2xl glass-card space-y-2.5 h-full flex flex-col justify-between">
                 <div>
                   <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 w-fit border border-slate-100 dark:border-slate-700 mb-2">
                     {item.icon}
                   </div>
-                  <h3 className="text-xs font-extrabold text-slate-900 dark:text-white">{item.title}</h3>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium mt-1">{item.description}</p>
+                  <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">{item.title}</h3>
+                  <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium mt-1">{item.description}</p>
                 </div>
               </div>
             </AntiGravityCard>
@@ -202,14 +202,14 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400">How It Works</h3>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {processSteps.map((step, idx) => (
             <AntiGravityCard key={idx} floatDelay={`${idx * 0.15}s`} depth={0.5}>
               <div className="p-3.5 rounded-2xl glass-card space-y-1.5 h-full relative">
                 <span className="text-xs font-extrabold text-cyan-600 font-mono block">
                   {step.num}. {step.title}
                 </span>
-                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-normal">{step.desc}</p>
+                <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-normal">{step.desc}</p>
               </div>
             </AntiGravityCard>
           ))}
@@ -219,10 +219,10 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       {/* FAQ ACCORDION SECTION */}
       <section className="max-w-4xl mx-auto px-4 space-y-4 pt-2">
         <div className="text-center space-y-1.5">
-          <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
+          <span className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
             Frequently Asked Questions
           </span>
-          <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
             Everything You Need to Know
           </h2>
         </div>
@@ -235,13 +235,13 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
             >
               <button
                 onClick={() => toggleFaq(idx)}
-                className="w-full p-4 text-left flex items-center justify-between font-extrabold text-xs text-slate-900 dark:text-white focus:outline-none"
+                className="w-full p-3.5 sm:p-4 text-left flex items-center justify-between font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none"
               >
-                <span>{faq.q}</span>
-                <ChevronDown className={`w-4 h-4 text-teal-600 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`} />
+                <span className="pr-2">{faq.q}</span>
+                <ChevronDown className={`w-4 h-4 text-teal-600 shrink-0 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`} />
               </button>
               {activeFaq === idx && (
-                <div className="px-4 pb-4 text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium border-t border-slate-100 dark:border-slate-800/80 pt-3 animate-fade-rise">
+                <div className="px-3.5 sm:px-4 pb-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium border-t border-slate-100 dark:border-slate-800/80 pt-3 animate-fade-rise">
                   {faq.a}
                 </div>
               )}
@@ -253,9 +253,9 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       {/* CONTACT FORM SECTION */}
       <section className="max-w-3xl mx-auto px-4">
         <AntiGravityCard floatDelay="0.2s" depth={0.5}>
-          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-7 shadow-xl space-y-5 glass-panel">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 sm:p-7 shadow-xl space-y-5 glass-panel">
             <div className="text-center space-y-1.5">
-              <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
                 Clinical Inquiry & Institutional Access
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -265,7 +265,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
             {contactSubmitted && (
               <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs font-semibold flex items-center space-x-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                 <span>Thank you for your inquiry! Our clinical AI team will reach out within 24 hours.</span>
               </div>
             )}
