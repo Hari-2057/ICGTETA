@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
+import { LandingPage } from './pages/LandingPage';
 import { Dashboard } from './pages/Dashboard';
 import { ReportsHistory } from './pages/ReportsHistory';
 import { ModelPerformance } from './pages/ModelPerformance';
@@ -19,7 +20,7 @@ const INITIAL_EMPTY_LAB_DATA = {
 };
 
 export function App() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('home');
   const [isHealthy, setIsHealthy] = useState(false);
   const [isMetricsModalOpen, setIsMetricsModalOpen] = useState(false);
   const [modelInfo, setModelInfo] = useState(null);
@@ -104,6 +105,12 @@ export function App() {
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {activeTab === 'home' && (
+          <LandingPage
+            onLaunchWorkspace={() => setActiveTab('dashboard')}
+            onGoToPerformance={() => setActiveTab('performance')}
+          />
+        )}
         {activeTab === 'dashboard' && (
           <Dashboard
             labData={labData}
@@ -129,12 +136,45 @@ export function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-6 text-center text-xs text-slate-600 dark:text-slate-400 transition-colors duration-300">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-8 text-center text-xs text-slate-600 dark:text-slate-400 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-6 text-left pb-6 border-b border-slate-100 dark:border-slate-800 mb-6">
+          <div className="space-y-2">
+            <span className="text-sm font-extrabold text-slate-900 dark:text-white">Diabetes CDSS</span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+              Conformal-aware clinical decision support system for precision glycemic risk assessment.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Clinical Platform</span>
+            <ul className="space-y-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <li className="hover:text-cyan-600 cursor-pointer" onClick={() => setActiveTab('dashboard')}>Clinical Workspace</li>
+              <li className="hover:text-cyan-600 cursor-pointer" onClick={() => setActiveTab('reports')}>Patient Reports History</li>
+              <li className="hover:text-cyan-600 cursor-pointer" onClick={() => setActiveTab('performance')}>Power BI Dashboard</li>
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Standards & AI</span>
+            <ul className="space-y-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <li className="hover:text-cyan-600 cursor-pointer" onClick={() => setActiveTab('methodology')}>ADA & WHO Guidelines</li>
+              <li>MAPIE Conformal Calibration</li>
+              <li>SHAP TreeExplainer</li>
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Database & Cloud</span>
+            <ul className="space-y-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <li>Supabase PostgreSQL</li>
+              <li>Supabase PDF Storage</li>
+              <li>Vercel Serverless API</li>
+            </ul>
+          </div>
+        </div>
+
         <p className="font-medium">
           Clinical Decision Support System (CDSS) for Diabetes Risk Assessment & Conformal Explainability.
         </p>
         <p className="mt-1 text-slate-500 dark:text-slate-500 font-mono text-[11px]">
-          Engineered with XGBoost, SHAP TreeExplainer, MAPIE Conformal Calibration, FastAPI & React.
+          Engineered with XGBoost, SHAP TreeExplainer, MAPIE Conformal Calibration, FastAPI, Supabase & React.
         </p>
       </footer>
 

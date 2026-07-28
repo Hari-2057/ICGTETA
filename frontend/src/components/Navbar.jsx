@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stethoscope, Activity, Cpu, BookOpen, FileText, Sun, Moon } from 'lucide-react';
+import { Stethoscope, Activity, Cpu, BookOpen, FileText, Sun, Moon, Home } from 'lucide-react';
 
 export const Navbar = ({ activeTab, setActiveTab, isHealthy, theme, toggleTheme }) => {
   return (
@@ -8,7 +8,7 @@ export const Navbar = ({ activeTab, setActiveTab, isHealthy, theme, toggleTheme 
         <div className="flex items-center justify-between h-16">
           
           {/* Clinical Emblem & Brand */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('dashboard')}>
+          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('home')}>
             <div className="relative p-2.5 rounded-xl bg-gradient-to-br from-cyan-600 to-blue-600 text-white shadow-md shadow-cyan-600/20 border border-cyan-400/30 flex items-center justify-center">
               <Stethoscope className="w-5 h-5 text-white stroke-[2.5]" />
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
@@ -33,6 +33,18 @@ export const Navbar = ({ activeTab, setActiveTab, isHealthy, theme, toggleTheme 
 
           {/* Navigation Tabs */}
           <nav className="flex items-center space-x-1 sm:space-x-1.5 bg-slate-100/80 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80">
+            <button
+              onClick={() => setActiveTab('home')}
+              className={`flex items-center space-x-1.5 sm:space-x-2 px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all duration-200 ${
+                activeTab === 'home'
+                  ? 'bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 border border-teal-200/90 dark:border-teal-800/90 shadow-sm'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700/60'
+              }`}
+            >
+              <Home className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+              <span>Overview</span>
+            </button>
+
             <button
               onClick={() => setActiveTab('dashboard')}
               className={`flex items-center space-x-1.5 sm:space-x-2 px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all duration-200 ${
