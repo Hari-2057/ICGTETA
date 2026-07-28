@@ -23,18 +23,15 @@ export const HologramHuman = () => {
         </div>
       </div>
 
-      {/* 3. USER-PROVIDED 3D HOLOGRAPHIC HUMAN & PEDESTAL PLATFORM (100% Merged with background) */}
+      {/* 3. ONLY 3D HOLOGRAPHIC HUMAN FIGURE & PEDESTAL (100% Transparent Background - NO BLACK BOX) */}
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center animate-hologram-breath">
         
-        {/* Hologram Human Body Image provided by User */}
+        {/* Only Hologram Human Figure Image on Transparent Background */}
         <div className="relative w-full h-[480px] flex items-center justify-center">
           <img
-            src="/user_hologram_exact.png"
-            alt="3D Holographic Human Body"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(6,182,212,0.8)]"
-            style={{
-              mixBlendMode: 'multiply'
-            }}
+            src="/only_human_hologram.png"
+            alt="Only 3D Holographic Human Body"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(6,182,212,0.85)]"
           />
 
           {/* BLUE HOLOGRAPHIC SCANNING LASER LINE (Head to toe loop) */}
