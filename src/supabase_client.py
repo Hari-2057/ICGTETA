@@ -41,9 +41,10 @@ def save_report_to_supabase(
     """
     report_id = f"CDSS_Report_{int(time.time())}"
     
-    # Core row matching user's Supabase table schema with safe parsing
+    # Core row matching user's Supabase table schema with safe parsing & patient_session_id isolation
     db_row = {
         "id": report_id,
+        "patient_session_id": patient_session_id,
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         "patient_age": safe_int(patient_data.get("age"), 45),
         "patient_gender": str(patient_data.get("gender") or "Female"),
@@ -67,12 +68,15 @@ def save_report_to_supabase(
     return db_row
 
 def fetch_reports_from_supabase(patient_session_id: str = None) -> List[Dict[str, Any]]:
-    """Fetches patient reports from Supabase Table Editor safely."""
+    """Fetches patient reports from Supabase Table Editor safely with patient_session_id isolation."""
     if is_supabase_configured():
         try:
             from supabase import create_client
             supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
-            response = supabase.table("patient_reports").select("*").order("created_at", desc=True).execute()
+            query = supabase.table("patient_reports").select("*")
+            if patient_session_id and patient_session_id != "ALL":
+                query = query.eq("patient_session_id", patient_session_id)
+            response = query.order("created_at", desc=True).execute()
             if response.data:
                 return response.data
         except Exception as e:

@@ -96,169 +96,68 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   ];
 
   return (
-    <div className="space-y-10 py-2 relative z-10">
+    <div className="space-y-12 py-4 relative z-10">
       
-      {/* HERO SECTION WITH BALANCED 2-COLUMN LAYOUT */}
-      <section className="relative overflow-hidden pt-4 pb-4">
+      {/* HERO SECTION CENTERED LAYOUT */}
+      <section className="relative overflow-hidden pt-6 pb-6">
         
         {/* Apple Vision Pro Ambient Light Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[480px] bg-gradient-to-b from-cyan-200/40 via-sky-100/30 to-transparent dark:from-cyan-950/25 dark:via-sky-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10 px-4 max-w-7xl mx-auto">
+        <div className="relative text-center max-w-4xl mx-auto space-y-6 px-4 z-10">
           
-          {/* LEFT COLUMN: HERO TEXT & CTAS */}
-          <div className="lg:col-span-6 space-y-5 text-left">
-            
-            {/* Feature Badge */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-100/70 dark:bg-cyan-950/70 border border-cyan-300/60 dark:border-cyan-700/60 text-cyan-800 dark:text-cyan-300 text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 animate-spin-slow" />
-              <span>Next-Gen Framer HealthTech Platform</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping"></span>
-            </div>
-
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15] animate-fade-rise stagger-1">
-              Precision Diabetes Risk Assessment with <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 dark:from-cyan-400 dark:via-teal-400 dark:to-blue-400">Calibrated Conformal AI</span>
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-medium animate-fade-rise stagger-2">
-              Empower physicians with mathematically guaranteed confidence bounds (95% statistical confidence), SHAP game-theoretic explainability, and automated blood lab report PDF parsing.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-1 animate-fade-rise stagger-3">
-              <MagneticButton
-                onClick={onLaunchWorkspace}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-2xl liquid-btn-primary font-extrabold text-xs flex items-center justify-center space-x-2 shadow-lg shadow-cyan-600/25"
-              >
-                <Stethoscope className="w-4 h-4 text-white icon-nudge" />
-                <span>Launch Clinical Workspace</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </MagneticButton>
-
-              <MagneticButton
-                onClick={onGoToPerformance}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs border border-slate-200 dark:border-slate-800 shadow-sm transition flex items-center justify-center space-x-2"
-              >
-                <BarChart2 className="w-4 h-4 text-amber-600 dark:text-amber-400 icon-nudge" />
-                <span>Explore Power BI Analytics</span>
-              </MagneticButton>
-            </div>
-
+          {/* Feature Badge */}
+          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-cyan-100/70 dark:bg-cyan-950/70 border border-cyan-300/60 dark:border-cyan-700/60 text-cyan-800 dark:text-cyan-300 text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 animate-spin-slow" />
+            <span>Next-Gen Framer HealthTech Platform</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping"></span>
           </div>
 
-          {/* RIGHT COLUMN: CLINICAL DASHBOARD PREVIEW CARD */}
-          <div className="lg:col-span-6">
-            <AntiGravityCard depth={0.6} floatDelay="0.2s">
-              <div className="bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-800/90 rounded-3xl p-5 sm:p-6 shadow-2xl glass-panel space-y-4">
-                
-                {/* Header */}
-                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                  <div className="flex items-center space-x-2">
-                    <div className="p-1.5 rounded-xl bg-cyan-50 dark:bg-cyan-950 text-cyan-600 border border-cyan-200 dark:border-cyan-800">
-                      <HeartPulse className="w-4 h-4" />
-                    </div>
-                    <span className="font-extrabold text-xs text-slate-900 dark:text-white">Clinical Dashboard</span>
-                    <span className="flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-                      <span>Live</span>
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-bold text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-lg">Last 30 Days</span>
-                </div>
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15] animate-fade-rise stagger-1">
+            Precision Diabetes Risk Assessment with <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 dark:from-cyan-400 dark:via-teal-400 dark:to-blue-400">Calibrated Conformal AI</span>
+          </h1>
 
-                {/* Score & Donut Charts Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Diabetes Risk Score */}
-                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-2">
-                    <span className="text-[10px] font-bold text-slate-500 block">Diabetes Risk Score</span>
-                    <div className="flex items-baseline space-x-2">
-                      <span className="text-3xl font-extrabold font-mono text-slate-900 dark:text-white">0.28</span>
-                      <span className="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
-                        Low Risk
-                      </span>
-                    </div>
-                    <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
-                      <div className="bg-emerald-500 h-full w-[28%] rounded-full"></div>
-                    </div>
-                    <div className="flex justify-between text-[10px] font-bold text-slate-400 pt-1">
-                      <span>95% Confidence Interval</span>
-                      <span className="font-mono">0.18 – 0.38</span>
-                    </div>
-                  </div>
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium animate-fade-rise stagger-2">
+            Empower physicians with mathematically guaranteed confidence bounds (95% statistical confidence), SHAP game-theoretic explainability, and automated blood lab report PDF parsing.
+          </p>
 
-                  {/* Risk Distribution Donut */}
-                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-2">
-                    <span className="text-[10px] font-bold text-slate-500 block">Risk Distribution</span>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 rounded-full border-4 border-emerald-500 border-t-amber-500 border-r-rose-500 animate-spin-slow"></div>
-                      <div className="text-[10px] space-y-1 font-bold">
-                        <div className="flex items-center space-x-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500"></span><span>Low Risk 65%</span></div>
-                        <div className="flex items-center space-x-1.5"><span className="w-2 h-2 rounded-full bg-amber-500"></span><span>Med Risk 25%</span></div>
-                        <div className="flex items-center space-x-1.5"><span className="w-2 h-2 rounded-full bg-rose-500"></span><span>High Risk 10%</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 animate-fade-rise stagger-3">
+            <MagneticButton
+              onClick={onLaunchWorkspace}
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl liquid-btn-primary font-extrabold text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-lg shadow-cyan-600/25"
+            >
+              <Stethoscope className="w-5 h-5 text-white icon-nudge" />
+              <span>Launch Clinical Workspace</span>
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </MagneticButton>
 
-                {/* Top Contributing Factors & Recent Patients */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-1">
-                  {/* Top Contributing Factors */}
-                  <div className="space-y-2">
-                    <span className="font-bold text-slate-700 dark:text-slate-300 block">Top Contributing Factors</span>
-                    <div className="space-y-1.5">
-                      <div>
-                        <div className="flex justify-between font-semibold mb-0.5"><span>Glucose</span><span className="font-mono">0.42</span></div>
-                        <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full"><div className="bg-cyan-500 h-full w-[84%] rounded-full"></div></div>
-                      </div>
-                      <div>
-                        <div className="flex justify-between font-semibold mb-0.5"><span>BMI</span><span className="font-mono">0.21</span></div>
-                        <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full"><div className="bg-blue-500 h-full w-[42%] rounded-full"></div></div>
-                      </div>
-                      <div>
-                        <div className="flex justify-between font-semibold mb-0.5"><span>Age</span><span className="font-mono">0.15</span></div>
-                        <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full"><div className="bg-purple-500 h-full w-[30%] rounded-full"></div></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Recent Patients Table */}
-                  <div className="space-y-2">
-                    <span className="font-bold text-slate-700 dark:text-slate-300 block">Recent Patients</span>
-                    <div className="space-y-1.5 font-mono text-[10px]">
-                      <div className="flex justify-between items-center p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800">
-                        <span>P00123</span><span className="text-emerald-600 font-bold">Low Risk</span><span className="text-slate-400">2m ago</span>
-                      </div>
-                      <div className="flex justify-between items-center p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800">
-                        <span>P00124</span><span className="text-amber-600 font-bold">Med Risk</span><span className="text-slate-400">5m ago</span>
-                      </div>
-                      <div className="flex justify-between items-center p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800">
-                        <span>P00125</span><span className="text-rose-600 font-bold">High Risk</span><span className="text-slate-400">8m ago</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </AntiGravityCard>
+            <MagneticButton
+              onClick={onGoToPerformance}
+              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs sm:text-sm border border-slate-200 dark:border-slate-800 shadow-sm transition flex items-center justify-center space-x-2"
+            >
+              <BarChart2 className="w-5 h-5 text-amber-600 dark:text-amber-400 icon-nudge" />
+              <span>Explore Power BI Analytics</span>
+            </MagneticButton>
           </div>
 
         </div>
 
         {/* 5 HORIZONTALLY FLOATING PILL METRIC CARDS */}
-        <div className="mt-4 max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-5 gap-3">
+        <div className="mt-10 max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-5 gap-3">
           {pillMetrics.map((item, idx) => (
             <AntiGravityCard key={idx} floatDelay={`${idx * 0.15}s`} depth={0.5}>
-              <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md flex items-center space-x-3">
-                <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700">
+              <div className="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md flex items-center space-x-3">
+                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700">
                   {item.icon}
                 </div>
                 <div>
-                  <span className="text-base font-extrabold text-slate-900 dark:text-white font-mono block leading-tight">
+                  <span className="text-lg font-extrabold text-slate-900 dark:text-white font-mono block leading-tight">
                     {item.title}
                   </span>
-                  <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 block whitespace-nowrap">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 block whitespace-nowrap">
                     {item.desc}
                   </span>
                 </div>
@@ -270,7 +169,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       </section>
 
       {/* ADVANCED FEATURES SECTION */}
-      <section className="max-w-7xl mx-auto px-4 space-y-6 pt-0">
+      <section className="max-w-7xl mx-auto px-4 space-y-6 pt-2">
         <div className="text-center space-y-1.5">
           <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
             Why Choose Our Platform

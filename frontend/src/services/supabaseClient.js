@@ -65,9 +65,11 @@ export async function fetchSessionReportsFromSupabase(sessionId = getPatientSess
   if (!supabase) return [];
 
   try {
+    // Filter strictly by patient_session_id to prevent cross-patient report viewing
     const { data, error } = await supabase
       .from('patient_reports')
       .select('*')
+      .eq('patient_session_id', sessionId)
       .order('created_at', { ascending: false });
 
     if (error) {
