@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Stethoscope, Activity, ShieldCheck, Zap, Layers, FileUp, 
   BarChart2, Cloud, ArrowRight, CheckCircle2, ChevronDown, 
-  MessageSquare, Star, Sparkles, Cpu, Award, Globe, HeartPulse, Dna, Atom
+  Sparkles, HeartPulse, Dna, Atom
 } from 'lucide-react';
 
 export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
@@ -95,24 +95,6 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Dr. Eleanor Vance, MD",
-      role: "Chief Endocrinologist, St. Jude Health",
-      quote: "The conformal confidence calibration is a game-changer. Knowing whether a prediction is 98% reliable or triggers an uncertainty alert gives our team total clinical confidence."
-    },
-    {
-      name: "Dr. Marcus Thorne, CMIO",
-      role: "Director of Clinical Informatics",
-      quote: "Being able to upload raw patient blood test PDFs and instantly see SHAP feature attributions saves precious minutes during patient consultations."
-    },
-    {
-      name: "Prof. Sarah Lin, PhD",
-      role: "Health AI Researcher",
-      quote: "The Power BI analytics integration and Optuna tuning dashboard make this system exceptionally transparent and audit-ready for medical research."
-    }
-  ];
-
   return (
     <div className="space-y-24 py-4 relative z-10">
       
@@ -122,7 +104,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
         {/* Animated Parallax Gradient Glow Background */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-gradient-to-b from-teal-400/15 via-cyan-400/10 to-transparent dark:from-teal-900/25 dark:via-cyan-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
-        {/* FLOATING MICRO-BADGES - Positioned far to outer edges to NEVER collide with text */}
+        {/* FLOATING MICRO-BADGES */}
         <div className="absolute top-6 left-2 xl:left-8 hidden lg:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-teal-200/90 dark:border-teal-800/90 shadow-xl backdrop-blur-md animate-float-slow z-20">
           <Atom className="w-5 h-5 text-teal-600 dark:text-teal-400 animate-spin-slow" />
           <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 whitespace-nowrap">HbA1c & Glucose Analysis</span>
@@ -357,38 +339,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
         </div>
       </section>
 
-      {/* 5. TESTIMONIALS SECTION */}
-      <section className="max-w-6xl mx-auto px-4 space-y-10">
-        <div className="text-center space-y-3">
-          <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
-            Endorsements
-          </span>
-          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
-            Trusted by Leading Endocrinologists
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((item, idx) => (
-            <div key={idx} className="p-6 rounded-2xl glass-card space-y-4 flex flex-col justify-between">
-              <div className="flex items-center space-x-1 text-amber-400">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-amber-400" />
-                ))}
-              </div>
-              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed italic font-medium">
-                "{item.quote}"
-              </p>
-              <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-                <span className="text-xs font-extrabold text-slate-900 dark:text-white block">{item.name}</span>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">{item.role}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 6. FAQ ACCORDION SECTION */}
+      {/* 5. FAQ ACCORDION SECTION */}
       <section className="max-w-4xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-3">
           <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
@@ -422,7 +373,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
         </div>
       </section>
 
-      {/* 7. CONTACT FORM SECTION */}
+      {/* 6. CONTACT FORM SECTION */}
       <section className="max-w-3xl mx-auto px-4">
         <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl space-y-6 glass-panel">
           <div className="text-center space-y-2">
