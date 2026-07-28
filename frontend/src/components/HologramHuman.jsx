@@ -3,7 +3,7 @@ import { Heart, Activity, Dna, ShieldCheck, Zap, Sparkles, Cpu, CheckCircle2 } f
 
 export const HologramHuman = () => {
   return (
-    <div className="relative w-full max-w-sm lg:max-w-md mx-auto h-[480px] sm:h-[530px] flex items-center justify-center overflow-visible pointer-events-none select-none my-2">
+    <div className="relative w-full max-w-sm lg:max-w-md mx-auto h-[490px] sm:h-[540px] flex items-center justify-center overflow-visible pointer-events-none select-none my-2">
       
       {/* 1. SEAMLESS AMBIENT CYAN-BLUE VOLUMETRIC LIGHT GLOW */}
       <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/35 via-blue-400/25 to-transparent dark:from-teal-400/40 dark:via-cyan-400/30 dark:to-transparent rounded-full blur-3xl animate-pulse-glow"></div>
@@ -23,15 +23,18 @@ export const HologramHuman = () => {
         </div>
       </div>
 
-      {/* 3. EXACT TRANSPARENT 3D HOLOGRAPHIC HUMAN BODY & PLATFORM (100% Merged background) */}
+      {/* 3. USER-PROVIDED 3D HOLOGRAPHIC HUMAN & PEDESTAL PLATFORM (100% Merged with background) */}
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center animate-hologram-breath">
         
-        {/* Clean Hologram Image Asset */}
-        <div className="relative w-full h-[470px] flex items-center justify-center">
+        {/* Hologram Human Body Image provided by User */}
+        <div className="relative w-full h-[480px] flex items-center justify-center">
           <img
-            src="/clean_hologram_human.png"
+            src="/user_hologram_exact.png"
             alt="3D Holographic Human Body"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(6,182,212,0.85)]"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(6,182,212,0.8)]"
+            style={{
+              mixBlendMode: 'multiply'
+            }}
           />
 
           {/* BLUE HOLOGRAPHIC SCANNING LASER LINE (Head to toe loop) */}
