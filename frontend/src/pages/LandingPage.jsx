@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { 
   Stethoscope, Activity, ShieldCheck, Zap, Layers, FileUp, 
   BarChart2, Cloud, ArrowRight, CheckCircle2, ChevronDown, 
-  Sparkles, HeartPulse, Dna, Atom, UserCheck
+  Sparkles, HeartPulse, Dna, Atom
 } from 'lucide-react';
 import { AntiGravityCard } from '../components/AntiGravityCard';
 import { MagneticButton } from '../components/MagneticButton';
+import { HologramHuman } from '../components/HologramHuman';
 
 export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -100,11 +101,11 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   return (
     <div className="space-y-24 py-4 relative z-10">
       
-      {/* 1. HERO SECTION WITH SELF-DRAWING GLUCOSE WAVEFORM, HOLOGRAPHIC SILHOUETTE & FLOATING MOLECULES */}
+      {/* 1. HERO SECTION WITH LIVING 3D HOLOGRAPHIC HUMAN CENTERPIECE & SELF-DRAWING GLUCOSE WAVEFORM */}
       <section className="relative overflow-hidden pt-8 pb-16">
         
         {/* Animated Parallax Gradient Glow Background */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-gradient-to-b from-teal-400/15 via-cyan-400/10 to-transparent dark:from-teal-900/25 dark:via-cyan-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[480px] bg-gradient-to-b from-teal-400/15 via-cyan-400/10 to-transparent dark:from-teal-900/25 dark:via-cyan-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
         {/* FLOATING MICRO-BADGES */}
         <div className="absolute top-6 left-2 xl:left-8 hidden lg:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-teal-200/90 dark:border-teal-800/90 shadow-xl backdrop-blur-md animate-float-slow z-20">
@@ -129,10 +130,10 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
         <div className="relative text-center max-w-4xl mx-auto space-y-6 px-4 z-10">
           
-          {/* Clinical Badge */}
+          {/* Cleaned Clinical Feature Badge */}
           <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 via-cyan-500/10 to-blue-500/10 border border-teal-300/40 dark:border-teal-700/40 text-teal-800 dark:text-teal-300 text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
             <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 animate-spin-slow" />
-            <span>Anti-Gravity AI Platform • Precision Care Elevated</span>
+            <span>Next-Gen Healthcare AI • Holographic CDSS</span>
             <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-ping"></span>
           </div>
 
@@ -141,17 +142,8 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
             Precision Diabetes Risk Assessment with <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 dark:from-teal-400 dark:via-cyan-400 dark:to-blue-400">Calibrated Conformal AI</span>
           </h1>
 
-          {/* HOLOGRAPHIC HUMAN SILHOUETTE & ROTATING PLATFORM */}
-          <div className="relative my-8 h-32 flex items-center justify-center">
-            {/* Rotating Hologram Platform Ring Base */}
-            <div className="absolute w-48 h-48 rounded-full border-2 border-dashed border-teal-500/40 dark:border-teal-400/40 animate-platform-rotate pointer-events-none"></div>
-            <div className="absolute w-36 h-36 rounded-full border border-cyan-500/30 dark:border-cyan-400/30 animate-spin-slow pointer-events-none"></div>
-
-            {/* Suspended Breathing Hologram Avatar */}
-            <div className="relative p-4 rounded-3xl bg-gradient-to-br from-teal-500/20 via-cyan-500/20 to-blue-500/20 border border-teal-300/40 dark:border-teal-700/40 backdrop-blur-xl shadow-2xl animate-hologram-breath z-10 flex items-center justify-center">
-              <UserCheck className="w-10 h-10 text-teal-600 dark:text-teal-300 animate-pulse" />
-            </div>
-          </div>
+          {/* LIVING 3D HOLOGRAPHIC HUMAN CENTERPIECE */}
+          <HologramHuman />
 
           {/* Self-Drawing Animated Glucose Waveform SVG */}
           <div className="my-6 max-w-2xl mx-auto h-20 relative flex items-center justify-center">
