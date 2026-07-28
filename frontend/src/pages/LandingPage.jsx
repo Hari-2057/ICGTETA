@@ -4,6 +4,7 @@ import {
   BarChart2, Cloud, ArrowRight, CheckCircle2, ChevronDown, 
   MessageSquare, Star, Sparkles, Cpu, Award, Globe, HeartPulse, User
 } from 'lucide-react';
+import { HeroConstellationBackground } from '../components/HeroConstellationBackground';
 
 export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -116,14 +117,17 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   return (
     <div className="space-y-20 py-4">
       
-      {/* 1. FRAMER-STYLE HERO SECTION */}
-      <section className="relative overflow-hidden pt-6 pb-12">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-cyan-100/50 via-teal-50/30 to-transparent dark:from-cyan-950/30 dark:via-teal-950/10 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
+      {/* 1. ANIMATED DATA CONSTELLATION HERO SECTION */}
+      <section className="relative overflow-hidden pt-8 pb-16 rounded-3xl bg-[var(--hero-bg)] border border-slate-200/60 dark:border-slate-800/60 shadow-xl transition-colors duration-300">
+        
+        {/* Layer 1, 2, 3 Animated Data Constellation Canvas */}
+        <HeroConstellationBackground />
 
-        <div className="relative text-center max-w-4xl mx-auto space-y-6 px-4">
+        {/* Foreground Content (z-10 layer above constellation canvas) */}
+        <div className="relative z-10 text-center max-w-4xl mx-auto space-y-6 px-4">
           
           {/* Framer HealthTech Badge */}
-          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 via-teal-500/10 to-blue-500/10 border border-cyan-300/40 dark:border-cyan-700/40 text-cyan-800 dark:text-cyan-300 text-xs font-extrabold shadow-sm backdrop-blur-md">
+          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/15 via-teal-500/15 to-blue-500/15 border border-cyan-400/40 dark:border-cyan-700/50 text-cyan-900 dark:text-cyan-200 text-xs font-extrabold shadow-sm backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Next-Gen Framer HealthTech Platform</span>
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping"></span>
@@ -134,8 +138,8 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
             Precision Diabetes Risk Assessment with <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 dark:from-cyan-400 dark:via-teal-400 dark:to-blue-400">Calibrated Conformal AI</span>
           </h1>
 
-          {/* Subtitle - Cleaned of raw LaTeX math strings */}
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
             Empower physicians with mathematically guaranteed confidence bounds (95% statistical confidence), SHAP game-theoretic explainability, and automated blood lab report PDF parsing.
           </p>
 
@@ -152,7 +156,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
             <button
               onClick={onGoToPerformance}
-              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-sm border border-slate-200 dark:border-slate-800 shadow-md transition flex items-center justify-center space-x-2"
+              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 hover:bg-white dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 font-extrabold text-sm border border-slate-300 dark:border-slate-700 shadow-md backdrop-blur-md transition flex items-center justify-center space-x-2"
             >
               <BarChart2 className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               <span>Explore Power BI Analytics</span>

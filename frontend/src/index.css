@@ -9,6 +9,42 @@
   }
 }
 
+/* Constellation Hero Background Theme Variables - Light Mode */
+html.light, [data-theme="light"] {
+  --hero-bg: #EFF3F8;
+  --star-color-1: #185FA5;
+  --star-color-2: #534AB7;
+  --constellation-line: #185FA5;
+  --comet-1: #0F6E56;
+  --comet-1-glow: rgba(15, 110, 86, 0.4);
+  --comet-2: #993556;
+  --comet-2-glow: rgba(153, 53, 86, 0.4);
+  --molecule-core: #534AB7;
+  --orbit-dot-1: #185FA5;
+  --orbit-dot-2: #0F6E56;
+  --orbit-ring: #185FA5;
+  --star-peak-opacity: 0.7;
+  --comet-peak-opacity: 0.8;
+}
+
+/* Constellation Hero Background Theme Variables - Dark Mode */
+html.dark, [data-theme="dark"] {
+  --hero-bg: #0B1220;
+  --star-color-1: #93C5FD;
+  --star-color-2: #A78BFA;
+  --constellation-line: #93C5FD;
+  --comet-1: #5DCAA5;
+  --comet-1-glow: rgba(93, 202, 165, 0.7);
+  --comet-2: #F472B6;
+  --comet-2-glow: rgba(244, 114, 182, 0.7);
+  --molecule-core: #A78BFA;
+  --orbit-dot-1: #60A5FA;
+  --orbit-dot-2: #2DD4BF;
+  --orbit-ring: #3B82F6;
+  --star-peak-opacity: 0.9;
+  --comet-peak-opacity: 1.0;
+}
+
 /* Light Theme Design Tokens */
 html.light body {
   background-color: #f8fafc;
@@ -19,6 +55,139 @@ html.light body {
 html.dark body {
   background-color: #030712;
   color: #f8fafc;
+}
+
+/* Constellation Star Animation */
+.constellation-star {
+  animation: starTwinkle ease-in-out infinite alternate;
+}
+
+@keyframes starTwinkle {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: var(--star-peak-opacity);
+    transform: scale(1.15);
+  }
+}
+
+/* Layer 2: Comet Streaks */
+.comet-streak {
+  position: absolute;
+  width: 7px;
+  height: 2px;
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.comet-streak-1 {
+  background: var(--comet-1);
+  box-shadow: 0 0 8px var(--comet-1-glow);
+  top: 15%;
+  left: 5%;
+  animation: cometPath1 8s linear infinite;
+  animation-delay: 1s;
+}
+
+.comet-streak-2 {
+  background: var(--comet-2);
+  box-shadow: 0 0 8px var(--comet-2-glow);
+  top: 30%;
+  left: 35%;
+  animation: cometPath2 7.5s linear infinite;
+  animation-delay: 4s;
+}
+
+@keyframes cometPath1 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(25deg);
+  }
+  10% {
+    opacity: var(--comet-peak-opacity);
+  }
+  90% {
+    opacity: var(--comet-peak-opacity);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(450px, 220px) rotate(25deg);
+  }
+}
+
+@keyframes cometPath2 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(32deg);
+  }
+  10% {
+    opacity: var(--comet-peak-opacity);
+  }
+  90% {
+    opacity: var(--comet-peak-opacity);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(380px, 240px) rotate(32deg);
+  }
+}
+
+/* Layer 3: Molecule Orbit Animations */
+.molecule-core {
+  animation: corePulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes corePulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.orbit-track-1 {
+  animation: orbitClockwise 12s linear infinite;
+}
+
+.orbit-track-2 {
+  animation: orbitCounterClockwise 16s linear infinite;
+}
+
+@keyframes orbitClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitCounterClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .constellation-star,
+  .comet-streak,
+  .molecule-core,
+  .orbit-track-1,
+  .orbit-track-2 {
+    animation: none !important;
+    opacity: 0.5 !important;
+    transform: none !important;
+  }
 }
 
 /* Glassmorphic Panel - Dual Mode */
