@@ -3,47 +3,47 @@ import { Heart, Activity, Dna, ShieldCheck, Zap, Sparkles, Cpu, CheckCircle2 } f
 
 export const HologramHuman = () => {
   return (
-    <div className="relative w-full max-w-sm lg:max-w-md mx-auto h-[480px] sm:h-[520px] flex items-center justify-center overflow-visible pointer-events-none select-none my-2">
+    <div className="relative w-full max-w-sm lg:max-w-md mx-auto h-[480px] sm:h-[530px] flex items-center justify-center overflow-visible pointer-events-none select-none my-2">
       
       {/* 1. SEAMLESS AMBIENT CYAN-BLUE VOLUMETRIC LIGHT GLOW */}
-      <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/30 via-blue-400/20 to-transparent dark:from-teal-400/35 dark:via-cyan-400/25 dark:to-transparent rounded-full blur-3xl animate-pulse-glow"></div>
-      <div className="absolute w-[340px] h-[340px] bg-cyan-300/25 dark:bg-cyan-400/25 rounded-full blur-2xl animate-hologram-breath"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/35 via-blue-400/25 to-transparent dark:from-teal-400/40 dark:via-cyan-400/30 dark:to-transparent rounded-full blur-3xl animate-pulse-glow"></div>
+      <div className="absolute w-[360px] h-[360px] bg-cyan-300/30 dark:bg-cyan-400/30 rounded-full blur-2xl animate-hologram-breath"></div>
 
       {/* 2. ORBITING DNA HELICES & BIOMOLECULES */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="absolute w-72 h-72 rounded-full border border-cyan-300/40 dark:border-cyan-600/40 animate-spin-slow">
+        <div className="absolute w-76 h-76 rounded-full border border-cyan-300/40 dark:border-cyan-600/40 animate-spin-slow">
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 p-2 rounded-full bg-white dark:bg-slate-900 border border-cyan-400 shadow-lg text-cyan-500">
             <Dna className="w-4 h-4 animate-spin-slow" />
           </div>
         </div>
-        <div className="absolute w-88 h-88 rounded-full border border-teal-300/30 dark:border-teal-600/30 animate-platform-rotate">
+        <div className="absolute w-92 h-92 rounded-full border border-teal-300/30 dark:border-teal-600/30 animate-platform-rotate">
           <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-2 rounded-full bg-white dark:bg-slate-900 border border-teal-400 shadow-lg text-teal-500">
             <Sparkles className="w-4 h-4 animate-pulse" />
           </div>
         </div>
       </div>
 
-      {/* 3. EXACT 3D HOLOGRAPHIC HUMAN BODY & PEDESTAL STAGE FROM IMAGE 2 */}
+      {/* 3. EXACT TRANSPARENT 3D HOLOGRAPHIC HUMAN BODY & PLATFORM (100% Merged background) */}
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center animate-hologram-breath">
         
-        {/* Hologram Human Body Image Extracted directly from Reference Image 2 */}
-        <div className="relative w-full h-[460px] flex items-center justify-center">
+        {/* Clean Hologram Image Asset */}
+        <div className="relative w-full h-[470px] flex items-center justify-center">
           <img
-            src="/hologram_exact_reference.png"
-            alt="Exact 3D Holographic Human Body from Reference Image 2"
-            className="w-full h-full object-contain filter drop-shadow-[0_0_25px_rgba(6,182,212,0.6)]"
+            src="/clean_hologram_human.png"
+            alt="3D Holographic Human Body"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(6,182,212,0.85)]"
           />
 
           {/* BLUE HOLOGRAPHIC SCANNING LASER LINE (Head to toe loop) */}
-          <div className="absolute inset-x-8 w-4/5 h-2.5 bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_22px_#38bdf8] animate-laser-scan z-30 pointer-events-none"></div>
+          <div className="absolute inset-x-8 w-4/5 h-2.5 bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_25px_#38bdf8] animate-laser-scan z-30 pointer-events-none"></div>
         </div>
 
       </div>
 
-      {/* 4. FLOATING HUD CARDS (100% Matching Reference Image) */}
+      {/* 4. FLOATING HUD CARDS (Matching Reference Image) */}
       
       {/* Heart Rate HUD Card (Top Right) */}
-      <div className="absolute top-10 -right-4 p-2.5 sm:p-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-cyan-200/90 dark:border-cyan-800/90 shadow-xl backdrop-blur-md text-[11px] font-mono text-cyan-800 dark:text-cyan-300 space-y-1 animate-float-slow z-20">
+      <div className="absolute top-8 -right-4 p-2.5 sm:p-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-cyan-200/90 dark:border-cyan-800/90 shadow-xl backdrop-blur-md text-[11px] font-mono text-cyan-800 dark:text-cyan-300 space-y-1 animate-float-slow z-20">
         <div className="flex items-center space-x-1.5">
           <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 animate-pulse" />
           <span className="font-extrabold text-xs">Heart Rate</span>
@@ -73,7 +73,7 @@ export const HologramHuman = () => {
       </div>
 
       {/* AI Analysis HUD Card (Bottom Right) */}
-      <div className="absolute bottom-16 -right-4 p-2.5 sm:p-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-purple-200/90 dark:border-purple-800/90 shadow-xl backdrop-blur-md text-[11px] font-mono text-purple-800 dark:text-purple-300 space-y-1 animate-float-slow z-20">
+      <div className="absolute bottom-14 -right-4 p-2.5 sm:p-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-purple-200/90 dark:border-purple-800/90 shadow-xl backdrop-blur-md text-[11px] font-mono text-purple-800 dark:text-purple-300 space-y-1 animate-float-slow z-20">
         <div className="flex items-center space-x-1.5">
           <Cpu className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 animate-spin-slow" />
           <span className="font-extrabold text-xs">AI Analysis</span>
