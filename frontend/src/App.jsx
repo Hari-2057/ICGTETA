@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
-import { HeroConstellationBackground } from './components/HeroConstellationBackground';
+import { AmbientBackground } from './components/AmbientBackground';
 import { LandingPage } from './pages/LandingPage';
 import { Dashboard } from './pages/Dashboard';
 import { ReportsHistory } from './pages/ReportsHistory';
@@ -96,95 +96,91 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen relative bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-300">
-      
-      {/* Global Root-Level Data Constellation Canvas (Renders behind every page) */}
-      <HeroConstellationBackground />
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans relative transition-colors duration-400">
+      {/* Ambient Particle Canvas Field & Parallax Grid */}
+      <AmbientBackground theme={theme} />
 
-      {/* App Shell Content (z-10 layer) */}
-      <div className="relative z-10 flex flex-col min-h-screen">
-        <Navbar
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          isHealthy={isHealthy}
-          theme={theme}
-          toggleTheme={toggleTheme}
-        />
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isHealthy={isHealthy}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
 
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {activeTab === 'home' && (
-            <LandingPage
-              onLaunchWorkspace={() => setActiveTab('dashboard')}
-              onGoToPerformance={() => setActiveTab('performance')}
-            />
-          )}
-          {activeTab === 'dashboard' && (
-            <Dashboard
-              labData={labData}
-              setLabData={setLabData}
-              prediction={prediction}
-              setPrediction={setPrediction}
-              onClearForm={handleClearForm}
-              onOpenMetricsModal={handleOpenMetricsModal}
-            />
-          )}
-          {activeTab === 'reports' && (
-            <ReportsHistory
-              onLoadReportToWorkspace={handleLoadReportToWorkspace}
-            />
-          )}
-          {activeTab === 'performance' && (
-            <ModelPerformance
-              prediction={prediction}
-              onGoToWorkspace={() => setActiveTab('dashboard')}
-            />
-          )}
-          {activeTab === 'methodology' && <Methodology />}
-        </main>
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10">
+        {activeTab === 'home' && (
+          <LandingPage
+            onLaunchWorkspace={() => setActiveTab('dashboard')}
+            onGoToPerformance={() => setActiveTab('performance')}
+          />
+        )}
+        {activeTab === 'dashboard' && (
+          <Dashboard
+            labData={labData}
+            setLabData={setLabData}
+            prediction={prediction}
+            setPrediction={setPrediction}
+            onClearForm={handleClearForm}
+            onOpenMetricsModal={handleOpenMetricsModal}
+          />
+        )}
+        {activeTab === 'reports' && (
+          <ReportsHistory
+            onLoadReportToWorkspace={handleLoadReportToWorkspace}
+          />
+        )}
+        {activeTab === 'performance' && (
+          <ModelPerformance
+            prediction={prediction}
+            onGoToWorkspace={() => setActiveTab('dashboard')}
+          />
+        )}
+        {activeTab === 'methodology' && <Methodology />}
+      </main>
 
-        {/* Footer */}
-        <footer className="border-t border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md py-8 text-center text-xs text-slate-600 dark:text-slate-400 transition-colors duration-300">
-          <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-6 text-left pb-6 border-b border-slate-100 dark:border-slate-800 mb-6">
-            <div className="space-y-2">
-              <span className="text-sm font-extrabold text-slate-900 dark:text-white">Diabetes CDSS</span>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                Conformal-aware clinical decision support system for precision glycemic risk assessment.
-              </p>
-            </div>
-            <div className="space-y-2">
-              <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Clinical Platform</span>
-              <ul className="space-y-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
-                <li className="hover:text-cyan-600 cursor-pointer" onClick={() => setActiveTab('dashboard')}>Clinical Workspace</li>
-                <li className="hover:text-cyan-600 cursor-pointer" onClick={() => setActiveTab('reports')}>Patient Reports History</li>
-                <li className="hover:text-cyan-600 cursor-pointer" onClick={() => setActiveTab('performance')}>Power BI Dashboard</li>
-              </ul>
-            </div>
-            <div className="space-y-2">
-              <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Standards & AI</span>
-              <ul className="space-y-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
-                <li className="hover:text-cyan-600 cursor-pointer" onClick={() => setActiveTab('methodology')}>ADA & WHO Guidelines</li>
-                <li>MAPIE Conformal Calibration</li>
-                <li>SHAP TreeExplainer</li>
-              </ul>
-            </div>
-            <div className="space-y-2">
-              <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Database & Cloud</span>
-              <ul className="space-y-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
-                <li>Supabase PostgreSQL</li>
-                <li>Supabase PDF Storage</li>
-                <li>Vercel Serverless API</li>
-              </ul>
-            </div>
+      {/* Footer */}
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 py-8 text-center text-xs text-slate-600 dark:text-slate-400 relative z-10 backdrop-blur-md transition-colors duration-400">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-6 text-left pb-6 border-b border-slate-100 dark:border-slate-800 mb-6">
+          <div className="space-y-2">
+            <span className="text-sm font-extrabold text-slate-900 dark:text-white">Diabetes CDSS</span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+              Precision Care Elevated • Conformal-aware clinical decision support system for precision glycemic risk assessment.
+            </p>
           </div>
+          <div className="space-y-2">
+            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Clinical Platform</span>
+            <ul className="space-y-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <li className="hover:text-teal-600 cursor-pointer" onClick={() => setActiveTab('dashboard')}>Clinical Workspace</li>
+              <li className="hover:text-teal-600 cursor-pointer" onClick={() => setActiveTab('reports')}>Patient Reports History</li>
+              <li className="hover:text-teal-600 cursor-pointer" onClick={() => setActiveTab('performance')}>Power BI Dashboard</li>
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Standards & AI</span>
+            <ul className="space-y-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <li className="hover:text-teal-600 cursor-pointer" onClick={() => setActiveTab('methodology')}>ADA & WHO Guidelines</li>
+              <li>MAPIE Conformal Calibration</li>
+              <li>SHAP TreeExplainer</li>
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">Database & Cloud</span>
+            <ul className="space-y-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <li>Supabase PostgreSQL</li>
+              <li>Supabase PDF Storage</li>
+              <li>Vercel Serverless API</li>
+            </ul>
+          </div>
+        </div>
 
-          <p className="font-medium">
-            Clinical Decision Support System (CDSS) for Diabetes Risk Assessment & Conformal Explainability.
-          </p>
-          <p className="mt-1 text-slate-500 dark:text-slate-500 font-mono text-[11px]">
-            Engineered with XGBoost, SHAP TreeExplainer, MAPIE Conformal Calibration, FastAPI, Supabase & React.
-          </p>
-        </footer>
-      </div>
+        <p className="font-medium">
+          Precision Care Elevated • Clinical Decision Support System (CDSS) for Diabetes Risk Assessment & Conformal Explainability.
+        </p>
+        <p className="mt-1 text-slate-500 dark:text-slate-500 font-mono text-[11px]">
+          Engineered with XGBoost, SHAP TreeExplainer, MAPIE Conformal Calibration, FastAPI, Supabase & React.
+        </p>
+      </footer>
 
       {/* Model Metrics Modal */}
       <ModelMetricsModal

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Stethoscope, Activity, ShieldCheck, Zap, Layers, FileUp, 
   BarChart2, Cloud, ArrowRight, CheckCircle2, ChevronDown, 
-  MessageSquare, Star, Sparkles, Cpu, Award, Globe, HeartPulse, User
+  MessageSquare, Star, Sparkles, Cpu, Award, Globe, HeartPulse, Dna, Atom
 } from 'lucide-react';
 
 export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
@@ -46,32 +46,32 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
   const features = [
     {
-      icon: <ShieldCheck className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />,
+      icon: <ShieldCheck className="w-6 h-6 text-teal-600 dark:text-teal-400 icon-nudge" />,
       title: "Conformal Prediction Bounds",
       description: "Mathematically calibrated confidence sets (95% confidence level) that flag borderline or high-uncertainty clinical cases."
     },
     {
-      icon: <Layers className="w-6 h-6 text-blue-600 dark:text-blue-400" />,
+      icon: <Layers className="w-6 h-6 text-blue-600 dark:text-blue-400 icon-nudge" />,
       title: "SHAP Game-Theoretic Attribution",
       description: "TreeExplainer Shapley values quantify positive risk drivers and protective biomarkers for each individual patient."
     },
     {
-      icon: <FileUp className="w-6 h-6 text-teal-600 dark:text-teal-400" />,
+      icon: <FileUp className="w-6 h-6 text-cyan-600 dark:text-cyan-400 icon-nudge" />,
       title: "Automated PDF Biomarker Importer",
       description: "Parses blood test lab report PDFs instantly to populate HbA1c, Fasting Glucose, Lipids, and Renal panels."
     },
     {
-      icon: <BarChart2 className="w-6 h-6 text-amber-600 dark:text-amber-400" />,
+      icon: <BarChart2 className="w-6 h-6 text-amber-600 dark:text-amber-400 icon-nudge" />,
       title: "Power BI Analytics Dashboard",
       description: "Interactive Optuna tuning graphs, feature importance rankings, confusion matrices, and CSV dataset exporter."
     },
     {
-      icon: <Cloud className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />,
+      icon: <Cloud className="w-6 h-6 text-indigo-600 dark:text-indigo-400 icon-nudge" />,
       title: "Supabase Cloud Database & Storage",
       description: "Real-time PostgreSQL insertion and cloud PDF storage with strict patient session isolation."
     },
     {
-      icon: <Activity className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />,
+      icon: <Activity className="w-6 h-6 text-emerald-600 dark:text-emerald-400 icon-nudge" />,
       title: "ADA & WHO Aligned Guidelines",
       description: "Standardized clinical action cards and personalized treatment protocols tailored to patient lab findings."
     }
@@ -114,66 +114,101 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
   ];
 
   return (
-    <div className="space-y-20 py-4">
+    <div className="space-y-24 py-4 relative z-10">
       
-      {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden pt-8 pb-16 rounded-3xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800/80 shadow-xl backdrop-blur-md transition-colors duration-300">
+      {/* 1. HERO SECTION WITH SELF-DRAWING GLUCOSE WAVEFORM & FLOATING MOLECULES */}
+      <section className="relative overflow-hidden pt-8 pb-16">
         
-        {/* Foreground Content */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto space-y-6 px-4">
+        {/* Animated Parallax Gradient Glow Background */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-gradient-to-b from-teal-400/15 via-cyan-400/10 to-transparent dark:from-teal-900/25 dark:via-cyan-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none"></div>
+
+        {/* Floating 3D Micro-Badges */}
+        <div className="absolute top-10 left-[8%] hidden lg:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-teal-200/80 dark:border-teal-800/80 shadow-lg backdrop-blur-md animate-float-slow">
+          <Atom className="w-5 h-5 text-teal-600 dark:text-teal-400 animate-spin-slow" />
+          <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200">HbA1c & Glucose Analysis</span>
+        </div>
+
+        <div className="absolute top-24 right-[10%] hidden lg:flex items-center space-x-2 px-3 py-2 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-cyan-200/80 dark:border-cyan-800/80 shadow-lg backdrop-blur-md animate-float-reverse">
+          <Dna className="w-5 h-5 text-cyan-600 dark:text-cyan-400 animate-pulse" />
+          <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200">SHAP TreeExplainer</span>
+        </div>
+
+        <div className="relative text-center max-w-4xl mx-auto space-y-6 px-4">
           
-          {/* Framer HealthTech Badge */}
-          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/15 via-teal-500/15 to-blue-500/15 border border-cyan-400/40 dark:border-cyan-700/50 text-cyan-900 dark:text-cyan-200 text-xs font-extrabold shadow-sm backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
-            <span>Next-Gen Framer HealthTech Platform</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-ping"></span>
+          {/* Clinical Badge */}
+          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 via-cyan-500/10 to-blue-500/10 border border-teal-300/40 dark:border-teal-700/40 text-teal-800 dark:text-teal-300 text-xs font-extrabold shadow-sm backdrop-blur-md animate-fade-rise">
+            <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 animate-spin-slow" />
+            <span>Precision Care Elevated • Healthcare AI</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-ping"></span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-            Precision Diabetes Risk Assessment with <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 dark:from-cyan-400 dark:via-teal-400 dark:to-blue-400">Calibrated Conformal AI</span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15] animate-fade-rise stagger-1">
+            Precision Diabetes Risk Assessment with <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 dark:from-teal-400 dark:via-cyan-400 dark:to-blue-400">Calibrated Conformal AI</span>
           </h1>
 
+          {/* Self-Drawing Animated Glucose Waveform SVG */}
+          <div className="my-6 max-w-2xl mx-auto h-20 relative flex items-center justify-center">
+            <svg className="w-full h-full overflow-visible" viewBox="0 0 600 80">
+              <path
+                d="M 0 40 Q 60 40, 90 20 T 150 40 T 210 65 T 270 10 T 330 65 T 390 40 T 450 25 T 510 45 T 600 40"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3.5"
+                className="text-teal-600 dark:text-teal-400 animate-dash-draw"
+                strokeLinecap="round"
+              />
+              {/* Traveling Glow Dot */}
+              <circle r="6" fill="#0d9488" className="animate-ping shadow-lg">
+                <animateMotion
+                  path="M 0 40 Q 60 40, 90 20 T 150 40 T 210 65 T 270 10 T 330 65 T 390 40 T 450 25 T 510 45 T 600 40"
+                  dur="4s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </svg>
+          </div>
+
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium animate-fade-rise stagger-2">
             Empower physicians with mathematically guaranteed confidence bounds (95% statistical confidence), SHAP game-theoretic explainability, and automated blood lab report PDF parsing.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-fade-rise stagger-3">
             <button
               onClick={onLaunchWorkspace}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-extrabold text-sm shadow-xl shadow-cyan-600/25 hover:shadow-cyan-600/35 hover:-translate-y-0.5 transition flex items-center justify-center space-x-2"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl liquid-btn-primary font-extrabold text-sm flex items-center justify-center space-x-2 group"
             >
-              <Stethoscope className="w-5 h-5 text-white" />
+              <Stethoscope className="w-5 h-5 text-white icon-nudge" />
               <span>Launch Clinical Workspace</span>
-              <ArrowRight className="w-4 h-4 ml-1" />
+              <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition" />
             </button>
 
             <button
               onClick={onGoToPerformance}
-              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 hover:bg-white dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 font-extrabold text-sm border border-slate-300 dark:border-slate-700 shadow-md backdrop-blur-md transition flex items-center justify-center space-x-2"
+              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-sm border border-slate-200 dark:border-slate-800 shadow-md transition flex items-center justify-center space-x-2 group"
             >
-              <BarChart2 className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+              <BarChart2 className="w-5 h-5 text-amber-600 dark:text-amber-400 icon-nudge" />
               <span>Explore Power BI Analytics</span>
             </button>
           </div>
 
           {/* Key Stat Badges */}
-          <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm">
-              <span className="text-2xl font-extrabold text-cyan-600 dark:text-cyan-400 font-mono">99.6%</span>
+          <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto animate-fade-rise stagger-4">
+            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm hover:shadow-md transition">
+              <span className="text-2xl font-extrabold text-teal-600 dark:text-teal-400 font-mono">99.6%</span>
               <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Tuned Accuracy</span>
             </div>
-            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm">
-              <span className="text-2xl font-extrabold text-teal-600 dark:text-teal-400 font-mono">&lt;50ms</span>
+            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm hover:shadow-md transition">
+              <span className="text-2xl font-extrabold text-cyan-600 dark:text-cyan-400 font-mono">&lt;50ms</span>
               <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Inference Latency</span>
             </div>
-            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm">
+            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm hover:shadow-md transition">
               <span className="text-2xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">3,500+</span>
               <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Clinical Records</span>
             </div>
-            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm">
+            <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md shadow-sm hover:shadow-md transition">
               <span className="text-2xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">ADA/WHO</span>
               <span className="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Aligned Protocols</span>
             </div>
@@ -185,7 +220,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       {/* 2. INTERACTIVE CLINICAL DASHBOARD PREVIEW */}
       <section className="max-w-6xl mx-auto px-4">
         <div className="text-center space-y-3 mb-8">
-          <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
+          <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
             Interactive Dashboard Preview
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
@@ -193,16 +228,16 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           </h2>
         </div>
 
-        <div className="relative rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 p-6 sm:p-8 shadow-2xl backdrop-blur-md overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-cyan-400/10 via-teal-400/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+        <div className="relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-2xl overflow-hidden glass-panel">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-teal-400/10 via-cyan-400/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
           {/* Mock Dashboard Card */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
             <div className="lg:col-span-7 space-y-4">
-              <div className="p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-3">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3">
                 <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2">
                   <span className="text-xs font-extrabold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
-                    <HeartPulse className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+                    <HeartPulse className="w-4 h-4 text-teal-600 dark:text-teal-400 animate-pulse" />
                     <span>Patient Lab Findings (HbA1c 6.4%, Fasting Glucose 118 mg/dL)</span>
                   </span>
                   <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
@@ -212,7 +247,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
                 <div className="grid grid-cols-3 gap-2 text-xs">
                   <div>
                     <span className="text-[10px] text-slate-500 block">HbA1c Level</span>
-                    <span className="font-bold text-cyan-700 dark:text-cyan-400 font-mono">6.4 %</span>
+                    <span className="font-bold text-teal-700 dark:text-teal-400 font-mono">6.4 %</span>
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-500 block">Fasting Glucose</span>
@@ -226,7 +261,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
               </div>
 
               {/* Mock SHAP Attributions */}
-              <div className="p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
                 <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">SHAP Risk Drivers (+ Attributions)</span>
                 <div className="space-y-2 text-xs">
                   <div>
@@ -235,7 +270,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
                       <span className="text-rose-600 dark:text-rose-400 font-mono">+0.80</span>
                     </div>
                     <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
-                      <div className="bg-rose-500 h-full w-[80%] rounded-full"></div>
+                      <div className="bg-gradient-to-r from-rose-500 to-pink-500 h-full w-[80%] rounded-full transition-all duration-700"></div>
                     </div>
                   </div>
                 </div>
@@ -243,7 +278,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
             </div>
 
             <div className="lg:col-span-5 space-y-4">
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-cyan-600 to-blue-600 text-white shadow-lg space-y-3">
+              <div className="p-5 rounded-2xl bg-gradient-to-br from-teal-600 via-cyan-600 to-blue-600 text-white shadow-lg space-y-3 relative overflow-hidden">
                 <span className="text-xs font-bold uppercase tracking-wider block opacity-90">Calibrated Conformal Confidence</span>
                 <div className="text-3xl font-extrabold font-mono">88.5%</div>
                 <p className="text-xs leading-relaxed opacity-95">
@@ -251,7 +286,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
                 </p>
                 <button
                   onClick={onLaunchWorkspace}
-                  className="w-full py-2.5 rounded-xl bg-white text-cyan-900 font-extrabold text-xs hover:bg-slate-100 transition shadow"
+                  className="w-full py-2.5 rounded-xl bg-white text-teal-900 font-extrabold text-xs hover:bg-slate-100 transition shadow"
                 >
                   Test Patient Biomarkers Now →
                 </button>
@@ -276,7 +311,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           {features.map((item, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md hover:shadow-xl hover:-translate-y-1 backdrop-blur-md transition duration-300 space-y-3"
+              className={`p-6 rounded-2xl glass-card space-y-3 group animate-fade-rise stagger-${(idx % 6) + 1}`}
             >
               <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/80 w-fit border border-slate-100 dark:border-slate-700">
                 {item.icon}
@@ -301,8 +336,8 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {processSteps.map((step, idx) => (
-            <div key={idx} className="p-6 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md space-y-3 relative">
-              <span className="text-4xl font-extrabold text-cyan-600/20 dark:text-cyan-400/20 font-mono block">
+            <div key={idx} className="p-6 rounded-2xl glass-card space-y-3 relative">
+              <span className="text-4xl font-extrabold text-teal-600/20 dark:text-teal-400/20 font-mono block">
                 {step.num}
               </span>
               <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">{step.title}</h3>
@@ -325,7 +360,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((item, idx) => (
-            <div key={idx} className="p-6 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md space-y-4 flex flex-col justify-between">
+            <div key={idx} className="p-6 rounded-2xl glass-card space-y-4 flex flex-col justify-between">
               <div className="flex items-center space-x-1 text-amber-400">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-amber-400" />
@@ -346,7 +381,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
       {/* 6. FAQ ACCORDION SECTION */}
       <section className="max-w-4xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-3">
-          <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
+          <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
             Frequently Asked Questions
           </span>
           <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
@@ -358,17 +393,17 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-sm backdrop-blur-md overflow-hidden transition"
+              className="rounded-2xl glass-card overflow-hidden transition"
             >
               <button
                 onClick={() => toggleFaq(idx)}
                 className="w-full p-5 text-left flex items-center justify-between font-extrabold text-xs text-slate-900 dark:text-white focus:outline-none"
               >
                 <span>{faq.q}</span>
-                <ChevronDown className={`w-4 h-4 text-cyan-600 transition-transform duration-200 ${activeFaq === idx ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 text-teal-600 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`} />
               </button>
               {activeFaq === idx && (
-                <div className="px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium border-t border-slate-100 dark:border-slate-800/80 pt-3">
+                <div className="px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium border-t border-slate-100 dark:border-slate-800/80 pt-3 animate-fade-rise">
                   {faq.a}
                 </div>
               )}
@@ -379,7 +414,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
       {/* 7. CONTACT FORM SECTION */}
       <section className="max-w-3xl mx-auto px-4">
-        <div className="bg-white/90 dark:bg-slate-900/90 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 p-8 shadow-xl backdrop-blur-md space-y-6">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl space-y-6 glass-panel">
           <div className="text-center space-y-2">
             <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
               Clinical Inquiry & Institutional Access
@@ -447,7 +482,7 @@ export const LandingPage = ({ onLaunchWorkspace, onGoToPerformance }) => {
 
             <button
               type="submit"
-              className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-cyan-600/25 transition"
+              className="w-full py-3.5 px-6 rounded-xl liquid-btn-primary font-extrabold text-xs uppercase tracking-wider transition"
             >
               Submit Clinical Inquiry
             </button>
