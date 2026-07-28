@@ -127,6 +127,25 @@ export const Navbar = ({ activeTab, setActiveTab, isHealthy, theme, toggleTheme 
               <span className="text-sm">{item.label}</span>
             </button>
           ))}
+
+          {/* Dedicated Mobile Theme Toggle Action Button */}
+          <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+            <button
+              onClick={() => {
+                toggleTheme();
+              }}
+              className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-xs font-extrabold border border-slate-200 dark:border-slate-800"
+            >
+              <div className="flex items-center space-x-3">
+                {isDark ? <Moon className="w-4 h-4 text-cyan-400" /> : <Sun className="w-4 h-4 text-amber-500" />}
+                <span>Theme: {isDark ? 'Enterprise Dark Mode' : 'Clinical Light Mode'}</span>
+              </div>
+              <span className="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 text-[10px] text-teal-600 dark:text-teal-400 border border-slate-200 dark:border-slate-700">
+                Switch
+              </span>
+            </button>
+          </div>
+
         </div>
       )}
     </header>

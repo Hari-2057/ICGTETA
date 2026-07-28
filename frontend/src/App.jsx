@@ -36,13 +36,33 @@ export function App() {
 
   useEffect(() => {
     const root = document.documentElement;
+    const body = document.body;
+    
     if (theme === 'dark') {
       root.classList.add('dark');
       root.classList.remove('light');
+      body.classList.add('dark');
+      body.classList.remove('light');
+      body.style.backgroundColor = '#030712';
+      body.style.color = '#f8fafc';
     } else {
       root.classList.add('light');
       root.classList.remove('dark');
+      body.classList.add('light');
+      body.classList.remove('dark');
+      body.style.backgroundColor = '#f8fafc';
+      body.style.color = '#0f172a';
     }
+    
+    // Update theme-color meta tag for mobile browser webviews
+    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (!metaThemeColor) {
+      metaThemeColor = document.createElement('meta');
+      metaThemeColor.name = 'theme-color';
+      document.head.appendChild(metaThemeColor);
+    }
+    metaThemeColor.content = theme === 'dark' ? '#030712' : '#f8fafc';
+
     localStorage.setItem('cdss_theme', theme);
   }, [theme]);
 
